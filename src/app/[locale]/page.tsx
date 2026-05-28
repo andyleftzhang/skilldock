@@ -10,9 +10,9 @@ export default async function HomePage({ params }: Props) {
   const t = await getTranslations("Home");
 
   return (
-    <main>
-      <h1>{t("title")}</h1>
-      <p>{t("status")}</p>
+    <main className="placeholder-shell">
+      <h1 className="placeholder-title">{t("title")}</h1>
+      <p className="placeholder-status">{t("status")}</p>
     </main>
   );
 }

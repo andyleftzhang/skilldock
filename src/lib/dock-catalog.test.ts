@@ -52,4 +52,17 @@ describe("dock catalog", () => {
     );
     expect(getDockTemplate("missing-dock")).toBeUndefined();
   });
+
+  it("allows each dock to define independent builder shelves", () => {
+    const reviewDock = getDockTemplate("code-review-guardrails");
+
+    expect(reviewDock?.personas.map((persona) => persona.id)).toEqual([
+      "principal-reviewer",
+      "release-sentinel",
+    ]);
+    expect(reviewDock?.defaultSelection.enhancementIds).toEqual([
+      "regression-map",
+      "security-review",
+    ]);
+  });
 });

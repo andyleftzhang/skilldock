@@ -23,6 +23,7 @@
       "download": "Download Config"
     },
     "panel": {
+      "docks": "Explore Docks",
       "personas": "Base Personas",
       "enhancements": "Enhancements",
       "outputLanguage": "Output Language",

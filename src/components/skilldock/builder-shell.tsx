@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { dockTemplates, getDockTemplate } from "@/lib/dock-catalog";
 import {
   buildPromptConfig,
   createInitialBuilderState,
@@ -23,6 +26,7 @@ type BuilderShellProps = {
     downloadLabel: string;
   };
   panel: {
+    docksLabel: string;
     personasLabel: string;
     enhancementsLabel: string;
     outputLanguageLabel: string;
@@ -42,12 +46,27 @@ export function BuilderShell({ children, locale, panel, preview }: BuilderShellP
     createInitialBuilderState(initialLocale),
   );
 
+  const selectedDock = getDockTemplate(builderState.selectedDockId) ?? dockTemplates[0];
   const promptConfig = useMemo(() => buildPromptConfig(builderState), [builderState]);
 
   return (
     <>
       <div className="flex flex-col gap-6">
         {children}
+        <DockExplorer
+          currentDockId={selectedDock.id}
+          label={panel.docksLabel}
+          onDockSelect={(dockId) => {
+            const dock = getDockTemplate(dockId) ?? dockTemplates[0];
+
+            setBuilderState((current) => ({
+              selectedDockId: dock.id,
+              selectedPersonaId: dock.defaultSelection.personaId,
+              selectedEnhancementIds: [...dock.defaultSelection.enhancementIds],
+              selectedOutputLocale: current.selectedOutputLocale,
+            }));
+          }}
+        />
         <PromptPreview
           copiedLabel={preview.copiedLabel}
           copyLabel={preview.copyLabel}
@@ -58,6 +77,7 @@ export function BuilderShell({ children, locale, panel, preview }: BuilderShellP
         />
       </div>
       <DockingPanel
+        enhancements={selectedDock.enhancements}
         enhancementsLabel={panel.enhancementsLabel}
         onEnhancementToggle={(enhancementId) => {
           setBuilderState((current) => ({
@@ -81,6 +101,8 @@ export function BuilderShell({ children, locale, panel, preview }: BuilderShellP
           }));
         }}
         outputLanguageLabel={panel.outputLanguageLabel}
+        outputLanguages={selectedDock.outputLanguages}
+        personas={selectedDock.personas}
         personasLabel={panel.personasLabel}
         selectedEnhancementIds={builderState.selectedEnhancementIds}
         selectedOutputLocale={builderState.selectedOutputLocale}
@@ -90,5 +112,56 @@ export function BuilderShell({ children, locale, panel, preview }: BuilderShellP
         shelfC={panel.shelfC}
       />
     </>
+  );
+}
+
+function DockExplorer({
+  currentDockId,
+  label,
+  onDockSelect,
+}: {
+  currentDockId: string;
+  label: string;
+  onDockSelect: (dockId: string) => void;
+}) {
+  return (
+    <Card className="border-violet-300/20 bg-slate-950/60 shadow-[0_18px_80px_rgba(139,92,246,0.12)] backdrop-blur-xl">
+      <CardHeader>
+        <CardTitle className="text-base text-white">{label}</CardTitle>
+      </CardHeader>
+      <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {dockTemplates.map((dock) => (
+          <button
+            aria-pressed={dock.id === currentDockId}
+            className={[
+              "rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-left transition hover:border-violet-300/50 hover:bg-violet-300/10",
+              dock.id === currentDockId ? "border-violet-300/50 bg-violet-300/10" : "",
+            ].join(" ")}
+            key={dock.id}
+            onClick={() => onDockSelect(dock.id)}
+            type="button"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <span className="text-sm font-semibold text-white">{dock.title}</span>
+              <Badge variant={dock.difficulty === "starter" ? "default" : "secondary"}>
+                {dock.sourceType}
+              </Badge>
+            </div>
+            <p className="mt-2 text-xs leading-5 text-muted-foreground">{dock.summary}</p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {dock.tags.slice(0, 3).map((tag) => (
+                <Badge
+                  className="border-white/10 bg-white/5 text-[0.68rem] text-cyan-100"
+                  key={tag}
+                  variant="outline"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </button>
+        ))}
+      </CardContent>
+    </Card>
   );
 }

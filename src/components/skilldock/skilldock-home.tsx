@@ -16,6 +16,7 @@ export type SkillDockHomeMessages = {
   copy: string;
   copied: string;
   download: string;
+  docks: string;
   personas: string;
   enhancements: string;
   outputLanguage: string;
@@ -46,6 +47,7 @@ export function SkillDockHome({ locale, messages }: SkillDockHomeProps) {
         <BuilderShell
           locale={locale}
           panel={{
+            docksLabel: messages.docks,
             enhancementsLabel: messages.enhancements,
             outputLanguageLabel: messages.outputLanguage,
             personasLabel: messages.personas,

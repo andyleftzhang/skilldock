@@ -23,6 +23,7 @@
       "download": "下载配置"
     },
     "panel": {
+      "docks": "探索 Docks",
       "personas": "基础角色",
       "enhancements": "增强规则",
       "outputLanguage": "输出语言",

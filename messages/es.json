@@ -23,6 +23,7 @@
       "download": "Descargar config"
     },
     "panel": {
+      "docks": "Explorar Docks",
       "personas": "Personas base",
       "enhancements": "Mejoras",
       "outputLanguage": "Idioma de salida",

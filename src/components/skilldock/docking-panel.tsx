@@ -8,8 +8,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
-import { enhancements, outputLanguages, personas } from "@/lib/skilldock-data";
-import type { OutputLanguage } from "@/lib/skilldock-types";
+import type { Enhancement, OutputLanguage, Persona } from "@/lib/skilldock-types";
 import { cn } from "@/lib/utils";
 
 type DockingPanelProps = {
@@ -22,6 +21,9 @@ type DockingPanelProps = {
   selectedPersonaId: string;
   selectedEnhancementIds: string[];
   selectedOutputLocale: OutputLanguage["locale"];
+  personas: Persona[];
+  enhancements: Enhancement[];
+  outputLanguages: OutputLanguage[];
   onPersonaSelect: (personaId: string) => void;
   onEnhancementToggle: (enhancementId: string) => void;
   onOutputLanguageChange: (locale: OutputLanguage["locale"]) => void;
@@ -37,6 +39,9 @@ export function DockingPanel({
   selectedPersonaId,
   selectedEnhancementIds,
   selectedOutputLocale,
+  personas,
+  enhancements,
+  outputLanguages,
   onPersonaSelect,
   onEnhancementToggle,
   onOutputLanguageChange,

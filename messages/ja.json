@@ -23,6 +23,7 @@
       "download": "設定をダウンロード"
     },
     "panel": {
+      "docks": "Dock を探す",
       "personas": "ベースペルソナ",
       "enhancements": "拡張設定",
       "outputLanguage": "出力言語",

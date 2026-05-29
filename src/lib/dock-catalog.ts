@@ -24,6 +24,33 @@ export type DockTemplate = {
   };
 };
 
+const sharedOutputLanguages: OutputLanguage[] = [
+  {
+    locale: "en",
+    label: "English",
+    hint: "Global default",
+    promptName: "English",
+  },
+  {
+    locale: "ja",
+    label: "日本語",
+    hint: "Localized output",
+    promptName: "Japanese",
+  },
+  {
+    locale: "es",
+    label: "Español",
+    hint: "Spanish output",
+    promptName: "Spanish",
+  },
+  {
+    locale: "zh-CN",
+    label: "简体中文",
+    hint: "Chinese output",
+    promptName: "Simplified Chinese",
+  },
+];
+
 export const dockTemplates: DockTemplate[] = [
   {
     id: "neon-command-deck",
@@ -92,35 +119,68 @@ export const dockTemplates: DockTemplate[] = [
         enabled: false,
       },
     ],
-    outputLanguages: [
-      {
-        locale: "en",
-        label: "English",
-        hint: "Global default",
-        promptName: "English",
-      },
-      {
-        locale: "ja",
-        label: "日本語",
-        hint: "Localized output",
-        promptName: "Japanese",
-      },
-      {
-        locale: "es",
-        label: "Español",
-        hint: "Spanish output",
-        promptName: "Spanish",
-      },
-      {
-        locale: "zh-CN",
-        label: "简体中文",
-        hint: "Chinese output",
-        promptName: "Simplified Chinese",
-      },
-    ],
+    outputLanguages: sharedOutputLanguages,
     defaultSelection: {
       personaId: "senior-frontend",
       enhancementIds: ["clean-code", "debug-mode"],
+      outputLocale: "en",
+    },
+  },
+  {
+    id: "code-review-guardrails",
+    title: "Code Review Guardrails",
+    summary:
+      "A review-focused prompt dock for risk checks, regression spotting, and handoff quality.",
+    sourceType: "prompt-pack",
+    difficulty: "advanced",
+    tags: ["code-review", "quality", "security", "handoff"],
+    promptMeta: {
+      origin: "SkillDock curated review pack",
+      sourceUrl: "https://github.com/search?q=awesome+code+review+prompts&type=repositories",
+      license: "Curated example",
+    },
+    personas: [
+      {
+        id: "principal-reviewer",
+        title: "Principal Reviewer",
+        summary: "Architecture, regressions, security, maintainability.",
+        signal: "PR",
+        promptRole: "Principal Code Reviewer",
+        mindset: "skeptical, precise, evidence-first",
+      },
+      {
+        id: "release-sentinel",
+        title: "Release Sentinel",
+        summary: "Production readiness, rollback risk, operational clarity.",
+        signal: "RX",
+        promptRole: "Release Readiness Reviewer",
+        mindset: "risk-aware, concise, launch-focused",
+      },
+    ],
+    enhancements: [
+      {
+        id: "regression-map",
+        label: "Regression Map",
+        description: "Identify likely behavior changes and missing regression coverage.",
+        enabled: true,
+      },
+      {
+        id: "security-review",
+        label: "Security Review",
+        description: "Call out risky data flows and unsafe defaults.",
+        enabled: true,
+      },
+      {
+        id: "handoff-check",
+        label: "Handoff Check",
+        description: "Summarize open risks, verification evidence, and follow-up work.",
+        enabled: false,
+      },
+    ],
+    outputLanguages: sharedOutputLanguages,
+    defaultSelection: {
+      personaId: "principal-reviewer",
+      enhancementIds: ["regression-map", "security-review"],
       outputLocale: "en",
     },
   },

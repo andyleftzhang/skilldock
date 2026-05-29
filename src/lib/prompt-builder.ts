@@ -1,14 +1,15 @@
-import { getDefaultDockTemplate } from "./dock-catalog";
+import { getDefaultDockTemplate, getDockTemplate } from "./dock-catalog";
 import type { OutputLanguage } from "./skilldock-types";
 
 export type BuilderState = {
+  selectedDockId: string;
   selectedPersonaId: string;
   selectedEnhancementIds: string[];
   selectedOutputLocale: OutputLanguage["locale"];
 };
 
 export function buildPromptConfig(state: BuilderState) {
-  const dock = getDefaultDockTemplate();
+  const dock = getDockForState(state.selectedDockId);
   const persona =
     dock.personas.find((item) => item.id === state.selectedPersonaId) ??
     dock.personas[0];
@@ -46,6 +47,7 @@ export function createInitialBuilderState(
   const dock = getDefaultDockTemplate();
 
   return {
+    selectedDockId: dock.id,
     selectedPersonaId: dock.defaultSelection.personaId,
     selectedEnhancementIds: [...dock.defaultSelection.enhancementIds],
     selectedOutputLocale,
@@ -61,4 +63,8 @@ export function toggleEnhancement(
   }
 
   return [...selectedEnhancementIds, enhancementId];
+}
+
+function getDockForState(selectedDockId: string) {
+  return getDockTemplate(selectedDockId) ?? getDefaultDockTemplate();
 }

@@ -10,6 +10,7 @@ describe("dock catalog", () => {
     const dock = getDefaultDockTemplate();
 
     expect(dock.id).toBe("neon-command-deck");
+    expect(dockTemplates.length).toBeGreaterThan(1);
     expect(dock.sourceType).toBe("cursor-rules");
     expect(dock.tags).toContain("prompt-engineering");
     expect(dock.promptMeta.sourceUrl).toContain("github.com");
@@ -46,6 +47,9 @@ describe("dock catalog", () => {
 
   it("looks up dock templates by id", () => {
     expect(getDockTemplate("neon-command-deck")).toBe(dockTemplates[0]);
+    expect(getDockTemplate("code-review-guardrails")?.title).toBe(
+      "Code Review Guardrails",
+    );
     expect(getDockTemplate("missing-dock")).toBeUndefined();
   });
 });

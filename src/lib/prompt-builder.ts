@@ -1,5 +1,5 @@
-import type { OutputLanguage } from "./skilldock-data";
-import { enhancements, outputLanguages, personas } from "./skilldock-data";
+import { getDefaultDockTemplate } from "./dock-catalog";
+import type { OutputLanguage } from "./skilldock-types";
 
 export type BuilderState = {
   selectedPersonaId: string;
@@ -8,16 +8,19 @@ export type BuilderState = {
 };
 
 export function buildPromptConfig(state: BuilderState) {
-  const persona = personas.find((item) => item.id === state.selectedPersonaId) ?? personas[0];
-  const selectedEnhancements = enhancements.filter((item) =>
+  const dock = getDefaultDockTemplate();
+  const persona =
+    dock.personas.find((item) => item.id === state.selectedPersonaId) ??
+    dock.personas[0];
+  const selectedEnhancements = dock.enhancements.filter((item) =>
     state.selectedEnhancementIds.includes(item.id),
   );
   const outputLanguage =
-    outputLanguages.find((item) => item.locale === state.selectedOutputLocale) ??
-    outputLanguages[0];
+    dock.outputLanguages.find((item) => item.locale === state.selectedOutputLocale) ??
+    dock.outputLanguages[0];
 
   return [
-    "dock: skilldock/neon-command-deck",
+    `dock: skilldock/${dock.id}`,
     "persona:",
     `  role: ${persona.promptRole}`,
     `  mindset: ${persona.mindset}`,
@@ -40,11 +43,11 @@ export function buildPromptConfig(state: BuilderState) {
 export function createInitialBuilderState(
   selectedOutputLocale: OutputLanguage["locale"],
 ): BuilderState {
+  const dock = getDefaultDockTemplate();
+
   return {
-    selectedPersonaId: personas[0].id,
-    selectedEnhancementIds: enhancements
-      .filter((enhancement) => enhancement.enabled)
-      .map((enhancement) => enhancement.id),
+    selectedPersonaId: dock.defaultSelection.personaId,
+    selectedEnhancementIds: [...dock.defaultSelection.enhancementIds],
     selectedOutputLocale,
   };
 }

@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { enhancements, outputLanguages, personas } from "@/lib/skilldock-data";
-import type { OutputLanguage } from "@/lib/skilldock-data";
+import type { OutputLanguage } from "@/lib/skilldock-types";
 import { cn } from "@/lib/utils";
 
 type DockingPanelProps = {

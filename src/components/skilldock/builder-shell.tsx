@@ -2,13 +2,13 @@
 
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
-import type { OutputLanguage } from "@/lib/skilldock-data";
 import {
   buildPromptConfig,
   createInitialBuilderState,
   toggleEnhancement,
 } from "@/lib/prompt-builder";
 import type { BuilderState } from "@/lib/prompt-builder";
+import type { OutputLanguage } from "@/lib/skilldock-types";
 import { DockingPanel } from "./docking-panel";
 import { PromptPreview } from "./prompt-preview";
 

@@ -7,7 +7,7 @@ import {
 } from "./skilldock-data";
 
 describe("SkillDock static builder data", () => {
-  it("provides the exact first-screen shelves and preview content", () => {
+  it("derives the first-screen shelves from the default dock catalog entry", () => {
     expect(personas.map((item) => item.id)).toEqual([
       "senior-frontend",
       "python-agent",

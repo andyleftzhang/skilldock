@@ -2,5 +2,32 @@
   "Home": {
     "title": "SkillDock",
     "status": "La base multilingüe está lista."
+  },
+  "Landing": {
+    "nav": {
+      "explore": "Explorar Docks",
+      "builder": "Builder",
+      "language": "Idioma"
+    },
+    "hero": {
+      "headline": "Ensambla habilidades de IA como módulos de comando.",
+      "highlightA": "Prompts modulares",
+      "highlightB": "Vista previa en vivo",
+      "subtitle": "Elige personas, reglas y restricciones de salida. SkillDock convierte patrones abiertos de habilidades de IA en un prompt/config listo para copiar o descargar."
+    },
+    "preview": {
+      "title": "Container Box",
+      "format": "Prompt/config generado",
+      "copy": "Copiar al portapapeles",
+      "download": "Descargar config"
+    },
+    "panel": {
+      "personas": "Base Personas",
+      "enhancements": "Enhancements",
+      "outputLanguage": "Output Language",
+      "shelfA": "Shelf A",
+      "shelfB": "Shelf B",
+      "shelfC": "Shelf C"
+    }
   }
 }

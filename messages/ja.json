@@ -2,5 +2,32 @@
   "Home": {
     "title": "SkillDock",
     "status": "多言語対応の基盤が準備できました。"
+  },
+  "Landing": {
+    "nav": {
+      "explore": "Dock を探す",
+      "builder": "ビルダー",
+      "language": "言語"
+    },
+    "hero": {
+      "headline": "AI スキルをコマンドモジュールのように組み立てる。",
+      "highlightA": "モジュール式プロンプト",
+      "highlightB": "リアルタイム設定プレビュー",
+      "subtitle": "ペルソナ、ルール、出力条件を選ぶだけ。SkillDock はオープンな AI スキルパターンを、コピーやダウンロードしやすいプロンプト/設定に整えます。"
+    },
+    "preview": {
+      "title": "Container Box",
+      "format": "生成されたプロンプト/設定",
+      "copy": "クリップボードにコピー",
+      "download": "設定をダウンロード"
+    },
+    "panel": {
+      "personas": "Base Personas",
+      "enhancements": "Enhancements",
+      "outputLanguage": "Output Language",
+      "shelfA": "Shelf A",
+      "shelfB": "Shelf B",
+      "shelfC": "Shelf C"
+    }
   }
 }

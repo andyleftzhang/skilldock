@@ -2,5 +2,32 @@
   "Home": {
     "title": "SkillDock",
     "status": "Localized foundation ready."
+  },
+  "Landing": {
+    "nav": {
+      "explore": "Explore Docks",
+      "builder": "Builder",
+      "language": "Language"
+    },
+    "hero": {
+      "headline": "Assemble AI skills like command modules.",
+      "highlightA": "Modular prompts",
+      "highlightB": "Live config preview",
+      "subtitle": "Pick personas, rules, and output constraints. SkillDock turns open AI skill patterns into a polished prompt/config you can copy or download."
+    },
+    "preview": {
+      "title": "Container Box",
+      "format": "Generated prompt/config",
+      "copy": "Copy to Clipboard",
+      "download": "Download Config"
+    },
+    "panel": {
+      "personas": "Base Personas",
+      "enhancements": "Enhancements",
+      "outputLanguage": "Output Language",
+      "shelfA": "Shelf A",
+      "shelfB": "Shelf B",
+      "shelfC": "Shelf C"
+    }
   }
 }

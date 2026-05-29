@@ -63,7 +63,11 @@ export function BuilderShell({ children, locale, panel, preview }: BuilderShellP
               selectedDockId: dock.id,
               selectedPersonaId: dock.defaultSelection.personaId,
               selectedEnhancementIds: [...dock.defaultSelection.enhancementIds],
-              selectedOutputLocale: current.selectedOutputLocale,
+              selectedOutputLocale: dock.outputLanguages.some(
+                (language) => language.locale === current.selectedOutputLocale,
+              )
+                ? current.selectedOutputLocale
+                : dock.defaultSelection.outputLocale,
             }));
           }}
         />
@@ -148,8 +152,22 @@ function DockExplorer({
               </Badge>
             </div>
             <p className="mt-2 text-xs leading-5 text-muted-foreground">{dock.summary}</p>
+            <div className="mt-3 grid grid-cols-2 gap-2 text-[0.68rem] text-muted-foreground">
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                {dock.personas.length} personas
+              </span>
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                {dock.enhancements.length} rules
+              </span>
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                {dock.promptMeta.origin}
+              </span>
+              <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                {dock.promptMeta.license}
+              </span>
+            </div>
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {dock.tags.slice(0, 3).map((tag) => (
+              {dock.tags.map((tag) => (
                 <Badge
                   className="border-white/10 bg-white/5 text-[0.68rem] text-cyan-100"
                   key={tag}

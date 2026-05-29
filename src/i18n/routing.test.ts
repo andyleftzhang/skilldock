@@ -11,14 +11,12 @@ describe("localized routing", () => {
     expect(routing.localeDetection).toBe(false);
   });
 
-  it("defines a statically analyzable proxy matcher for localized page requests", () => {
-    const proxySource = readFileSync(
-      join(process.cwd(), "src/proxy.ts"),
+  it("uses an app-router root redirect instead of middleware for Cloudflare", () => {
+    const rootPageSource = readFileSync(
+      join(process.cwd(), "src/app/page.tsx"),
       "utf8",
     );
 
-    expect(proxySource).toContain(
-      'matcher: "/((?!api|trpc|_next|_vercel|.*\\\\..*).*)"',
-    );
+    expect(rootPageSource).toContain('redirect("/en")');
   });
 });

@@ -19,6 +19,7 @@
       "title": "Container Box",
       "format": "Generated prompt/config",
       "copy": "Copy to Clipboard",
+      "copied": "Copied",
       "download": "Download Config"
     },
     "panel": {

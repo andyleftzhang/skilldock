@@ -19,6 +19,7 @@
       "title": "实时集装箱",
       "format": "已生成提示词/配置",
       "copy": "复制到剪贴板",
+      "copied": "已复制",
       "download": "下载配置"
     },
     "panel": {

@@ -3,6 +3,8 @@ export type Persona = {
   title: string;
   summary: string;
   signal: string;
+  promptRole: string;
+  mindset: string;
 };
 
 export type Enhancement = {
@@ -16,6 +18,7 @@ export type OutputLanguage = {
   locale: "en" | "ja" | "es" | "zh-CN";
   label: string;
   hint: string;
+  promptName: string;
 };
 
 export const personas: Persona[] = [
@@ -24,24 +27,32 @@ export const personas: Persona[] = [
     title: "Senior Frontend",
     summary: "React, design systems, accessibility, performance.",
     signal: "UI",
+    promptRole: "Senior Frontend Architect",
+    mindset: "pragmatic, precise, design-aware",
   },
   {
     id: "python-agent",
     title: "Python Agent",
     summary: "Automation, scripts, data handling, tool orchestration.",
     signal: "AI",
+    promptRole: "Python Agent",
+    mindset: "automation-first, reliable, data-aware",
   },
   {
     id: "prompt-engineer",
     title: "Prompt Engineer",
     summary: "Structured prompts, constraints, role framing.",
     signal: "PX",
+    promptRole: "Prompt Engineer",
+    mindset: "clear, structured, constraint-aware",
   },
   {
     id: "code-reviewer",
     title: "Code Reviewer",
     summary: "Risk analysis, regressions, maintainability checks.",
     signal: "QA",
+    promptRole: "Code Reviewer",
+    mindset: "skeptical, evidence-led, maintainability-focused",
   },
 ];
 
@@ -71,21 +82,25 @@ export const outputLanguages: OutputLanguage[] = [
     locale: "en",
     label: "English",
     hint: "Global default",
+    promptName: "English",
   },
   {
     locale: "ja",
     label: "日本語",
     hint: "Localized output",
+    promptName: "Japanese",
   },
   {
     locale: "es",
     label: "Español",
     hint: "Spanish output",
+    promptName: "Spanish",
   },
   {
     locale: "zh-CN",
     label: "简体中文",
     hint: "Chinese output",
+    promptName: "Simplified Chinese",
   },
 ];
 

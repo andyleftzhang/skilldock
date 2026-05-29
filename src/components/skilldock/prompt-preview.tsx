@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Copy, Download, TerminalSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,21 +10,43 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { promptPreviewLines } from "@/lib/skilldock-data";
 
 type PromptPreviewProps = {
   title: string;
   format: string;
   copyLabel: string;
+  copiedLabel: string;
   downloadLabel: string;
+  promptConfig: string;
 };
 
 export function PromptPreview({
   title,
   format,
   copyLabel,
+  copiedLabel,
   downloadLabel,
+  promptConfig,
 }: PromptPreviewProps) {
+  const [copied, setCopied] = useState(false);
+  const promptPreviewLines = promptConfig.split("\n");
+
+  async function copyPrompt() {
+    await navigator.clipboard.writeText(promptConfig);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  }
+
+  function downloadPrompt() {
+    const blob = new Blob([promptConfig], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "skilldock-config.txt";
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <Card className="overflow-hidden border-cyan-300/20 bg-slate-950/80 shadow-[0_24px_120px_rgba(34,211,238,0.18)] backdrop-blur-xl">
       <CardHeader className="flex flex-row items-center justify-between border-b border-white/10">
@@ -59,12 +84,18 @@ export function PromptPreview({
         </pre>
       </CardContent>
       <CardFooter className="flex flex-col gap-3 border-t border-white/10 bg-white/[0.02] p-4 sm:flex-row sm:justify-end">
-        <Button className="w-full sm:w-auto" type="button" variant="secondary">
+        <Button
+          className="w-full sm:w-auto"
+          onClick={copyPrompt}
+          type="button"
+          variant="secondary"
+        >
           <Copy data-icon="inline-start" />
-          {copyLabel}
+          {copied ? copiedLabel : copyLabel}
         </Button>
         <Button
           className="w-full bg-cyan-300 text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.34)] hover:bg-cyan-200 sm:w-auto"
+          onClick={downloadPrompt}
           type="button"
         >
           <Download data-icon="inline-start" />

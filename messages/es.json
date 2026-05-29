@@ -19,6 +19,7 @@
       "title": "Caja contenedora",
       "format": "Prompt/config generado",
       "copy": "Copiar al portapapeles",
+      "copied": "Copiado",
       "download": "Descargar config"
     },
     "panel": {

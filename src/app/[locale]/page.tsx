@@ -24,6 +24,7 @@ export default async function HomePage({ params }: Props) {
         previewTitle: t("preview.title"),
         previewFormat: t("preview.format"),
         copy: t("preview.copy"),
+        copied: t("preview.copied"),
         download: t("preview.download"),
         personas: t("panel.personas"),
         enhancements: t("panel.enhancements"),

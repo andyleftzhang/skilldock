@@ -16,18 +16,18 @@
       "subtitle": "选择角色、规则与输出约束。SkillDock 会把开源 AI 技能模式包装成可复制、可下载的高级提示词/配置。"
     },
     "preview": {
-      "title": "Container Box",
+      "title": "实时集装箱",
       "format": "已生成提示词/配置",
       "copy": "复制到剪贴板",
       "download": "下载配置"
     },
     "panel": {
-      "personas": "Base Personas",
-      "enhancements": "Enhancements",
-      "outputLanguage": "Output Language",
-      "shelfA": "Shelf A",
-      "shelfB": "Shelf B",
-      "shelfC": "Shelf C"
+      "personas": "基础角色",
+      "enhancements": "增强规则",
+      "outputLanguage": "输出语言",
+      "shelfA": "货架 A",
+      "shelfB": "货架 B",
+      "shelfC": "货架 C"
     }
   }
 }

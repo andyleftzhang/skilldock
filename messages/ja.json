@@ -16,18 +16,18 @@
       "subtitle": "ペルソナ、ルール、出力条件を選ぶだけ。SkillDock はオープンな AI スキルパターンを、コピーやダウンロードしやすいプロンプト/設定に整えます。"
     },
     "preview": {
-      "title": "Container Box",
+      "title": "コンテナボックス",
       "format": "生成されたプロンプト/設定",
       "copy": "クリップボードにコピー",
       "download": "設定をダウンロード"
     },
     "panel": {
-      "personas": "Base Personas",
-      "enhancements": "Enhancements",
-      "outputLanguage": "Output Language",
-      "shelfA": "Shelf A",
-      "shelfB": "Shelf B",
-      "shelfC": "Shelf C"
+      "personas": "ベースペルソナ",
+      "enhancements": "拡張設定",
+      "outputLanguage": "出力言語",
+      "shelfA": "棚 A",
+      "shelfB": "棚 B",
+      "shelfC": "棚 C"
     }
   }
 }

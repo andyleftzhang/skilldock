@@ -16,18 +16,18 @@
       "subtitle": "Elige personas, reglas y restricciones de salida. SkillDock convierte patrones abiertos de habilidades de IA en un prompt/config listo para copiar o descargar."
     },
     "preview": {
-      "title": "Container Box",
+      "title": "Caja contenedora",
       "format": "Prompt/config generado",
       "copy": "Copiar al portapapeles",
       "download": "Descargar config"
     },
     "panel": {
-      "personas": "Base Personas",
-      "enhancements": "Enhancements",
-      "outputLanguage": "Output Language",
-      "shelfA": "Shelf A",
-      "shelfB": "Shelf B",
-      "shelfC": "Shelf C"
+      "personas": "Personas base",
+      "enhancements": "Mejoras",
+      "outputLanguage": "Idioma de salida",
+      "shelfA": "Estante A",
+      "shelfB": "Estante B",
+      "shelfC": "Estante C"
     }
   }
 }

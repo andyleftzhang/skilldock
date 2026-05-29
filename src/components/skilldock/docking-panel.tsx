@@ -66,7 +66,7 @@ export function DockingPanel({
                 className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-3"
                 key={enhancement.id}
               >
-                <Checkbox checked={enhancement.enabled} readOnly />
+                <Checkbox aria-readonly="true" checked={enhancement.enabled} />
                 <span className="flex flex-col gap-1">
                   <span className="text-sm font-medium text-white">
                     + {enhancement.label}

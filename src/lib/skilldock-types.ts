@@ -15,7 +15,7 @@ export type Enhancement = {
 };
 
 export type OutputLanguage = {
-  locale: "en" | "ja" | "es" | "zh-CN";
+  locale: "en";
   label: string;
   hint: string;
   promptName: string;

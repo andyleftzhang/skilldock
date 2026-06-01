@@ -16,7 +16,6 @@ export default async function HomePage({ params }: Props) {
       messages={{
         navExplore: t("nav.explore"),
         navBuilder: t("nav.builder"),
-        navLanguage: t("nav.language"),
         headline: t("hero.headline"),
         highlightA: t("hero.highlightA"),
         highlightB: t("hero.highlightB"),

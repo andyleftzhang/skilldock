@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +22,7 @@ export type DockPageMessages = {
   enhancements: string;
   fileName: string;
   includedModules: string;
+  firstTasks: string;
   howToUse: string;
   howToUseIntro: string;
   license: string;
@@ -31,11 +31,14 @@ export type DockPageMessages = {
   recommendedWorkflow: string;
   safetyNotes: string;
   source: string;
+  supportedTools: string;
   tags: string;
   title: string;
   intro: string;
   useCases: string;
   viewDetails: string;
+  whyFeatured: string;
+  whatItDoes: string;
 };
 
 type DockListProps = {
@@ -84,7 +87,6 @@ export function DockList({ docks, locale, messages }: DockListProps) {
             </CardHeader>
             <CardContent className="flex flex-col gap-5">
               <DockMetaGrid dock={dock} messages={messages} />
-              <StatRow dock={dock} messages={messages} />
               <TagRow tags={dock.taxonomy.tags} />
               <Button asChild className="w-full bg-cyan-300 text-slate-950 hover:bg-cyan-200">
                 <Link href={`/${locale}/docks/${dock.id}`}>{messages.viewDetails}</Link>
@@ -117,10 +119,11 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
         </div>
         <DockMetaGrid dock={dock} messages={messages} />
         <TagRow tags={dock.taxonomy.tags} />
-        <StatRow dock={dock} messages={messages} />
-        <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
-          <Link href={`/${locale}?dock=${dock.id}#builder`}>{messages.backToBuilder}</Link>
-        </Button>
+        {dock.builder ? (
+          <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
+            <Link href={`/${locale}?dock=${dock.id}#builder`}>{messages.backToBuilder}</Link>
+          </Button>
+        ) : null}
       </div>
 
       <Card className="border-cyan-300/20 bg-slate-950/75 shadow-[0_24px_120px_rgba(34,211,238,0.16)] backdrop-blur-xl">
@@ -128,70 +131,48 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
           <CardTitle className="text-white">{messages.details}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
-          <ContentSection title={messages.useCases} items={dock.content.useCases} />
-
-          <Separator className="bg-white/10" />
-
-          <ContentSection title={messages.bestFor} items={dock.content.recommendedFor} />
-
-          <Separator className="bg-white/10" />
-
           <ContentSection
-            title={messages.includedModules}
-            items={dock.content.includedModules}
+            title={messages.whatItDoes}
+            items={dock.content.useCases.slice(0, 2)}
           />
 
           <Separator className="bg-white/10" />
 
-          <div className="flex flex-col gap-2">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200">
-              {messages.howToUse}
-            </h2>
-            <p className="text-sm leading-6 text-muted-foreground">
-              {messages.howToUseIntro}
-            </p>
-          </div>
-
           <ContentSection
-            ordered
-            title={messages.recommendedWorkflow}
-            items={dock.content.recommendedWorkflow}
+            title={messages.bestFor}
+            items={dock.content.recommendedFor.slice(0, 4)}
           />
 
           <Separator className="bg-white/10" />
 
-          <ContentSection title={messages.safetyNotes} items={dock.content.safetyNotes} />
+          <ContentSection
+            title={messages.whyFeatured}
+            items={dock.guide.bestPractices.slice(0, 3)}
+          />
 
           <Separator className="bg-white/10" />
 
-          <Shelf title={messages.personas}>
-            {dock.builder.personas.map((persona) => (
-              <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4" key={persona.id}>
-                <div className="flex items-center justify-between gap-3">
-                  <h2 className="font-semibold text-white">{persona.title}</h2>
-                  <Badge variant="secondary">{persona.signal}</Badge>
-                </div>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{persona.summary}</p>
-                <p className="mt-3 font-mono text-xs text-cyan-200">{persona.promptRole}</p>
-              </div>
-            ))}
-          </Shelf>
+          <ContentSection title={messages.supportedTools} items={dock.guide.supportedTools} />
 
           <Separator className="bg-white/10" />
 
-          <Shelf title={messages.enhancements}>
-            {dock.builder.enhancements.map((enhancement) => (
-              <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4" key={enhancement.id}>
-                <div className="flex items-center justify-between gap-3">
-                  <h2 className="font-semibold text-white">+ {enhancement.label}</h2>
-                  {enhancement.enabled ? <Badge>{messages.builder}</Badge> : null}
-                </div>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {enhancement.description}
-                </p>
-              </div>
-            ))}
-          </Shelf>
+          <ContentSection
+            title={messages.firstTasks}
+            items={dock.guide.firstRunExamples.slice(0, 3)}
+          />
+
+          <Separator className="bg-white/10" />
+
+          <ContentSection title={messages.safetyNotes} items={dock.content.safetyNotes.slice(0, 2)} />
+
+          {dock.source.url ? (
+            <>
+              <Separator className="bg-white/10" />
+              <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
+                <Link href={dock.source.url}>{messages.source}</Link>
+              </Button>
+            </>
+          ) : null}
         </CardContent>
       </Card>
     </section>
@@ -211,7 +192,6 @@ function DockMetaGrid({
     [messages.curated, dock.source.lastUpdated],
     [messages.origin, dock.source.repo ?? dock.source.author],
     [messages.license, dock.source.license],
-    [messages.source, dock.source.url ?? dock.source.type],
   ];
 
   return (
@@ -224,34 +204,6 @@ function DockMetaGrid({
           <div className="mt-1 break-words text-slate-200">{value}</div>
         </div>
       ))}
-    </div>
-  );
-}
-
-function StatRow({
-  dock,
-  messages,
-}: {
-  dock: DockTemplate;
-  messages: DockPageMessages;
-}) {
-  return (
-    <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground sm:grid-cols-4">
-      <Stat label={messages.personas} value={`${dock.builder.personas.length}`} />
-      <Stat label={messages.enhancements} value={`${dock.builder.enhancements.length}`} />
-      <Stat label={messages.includedModules} value={`${dock.stats.moduleCount}`} />
-      <Stat label={messages.tags} value={`${dock.taxonomy.tags.length}`} />
-    </div>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
-      <div className="text-lg font-semibold text-white">{value}</div>
-      <div className="mt-1 text-[0.68rem] uppercase tracking-[0.18em] text-cyan-200/80">
-        {label}
-      </div>
     </div>
   );
 }
@@ -279,17 +231,6 @@ function ContentSection({
           </li>
         ))}
       </List>
-    </div>
-  );
-}
-
-function Shelf({ children, title }: { children: ReactNode; title: string }) {
-  return (
-    <div className="flex flex-col gap-3">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200">
-        {title}
-      </h2>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">{children}</div>
     </div>
   );
 }

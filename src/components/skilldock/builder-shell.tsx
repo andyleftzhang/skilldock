@@ -6,7 +6,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { dockTemplates, getDockTemplate } from "@/lib/dock-catalog";
+import {
+  builderDockTemplates,
+  getBuilderDockTemplate,
+} from "@/lib/dock-catalog";
 import {
   createInitialBuilderState,
   toggleEnhancement,
@@ -43,7 +46,7 @@ type BuilderShellProps = {
   };
 };
 
-const supportedOutputLocales = new Set(["en", "ja", "es", "zh-CN"]);
+const supportedOutputLocales = new Set(["en"]);
 
 export function BuilderShell({
   children,
@@ -62,7 +65,8 @@ export function BuilderShell({
   const [selectedExportTargetId, setSelectedExportTargetId] =
     useState<ExportTargetId>("universal-prompt");
 
-  const selectedDock = getDockTemplate(builderState.selectedDockId) ?? dockTemplates[0];
+  const selectedDock =
+    getBuilderDockTemplate(builderState.selectedDockId) ?? builderDockTemplates[0];
   const exportArtifact = useMemo(
     () => buildSkillExport(builderState, selectedExportTargetId),
     [builderState, selectedExportTargetId],
@@ -77,7 +81,7 @@ export function BuilderShell({
           label={panel.docksLabel}
           locale={locale}
           onDockSelect={(dockId) => {
-            const dock = getDockTemplate(dockId) ?? dockTemplates[0];
+            const dock = getBuilderDockTemplate(dockId) ?? builderDockTemplates[0];
             const { builder } = dock;
 
             setBuilderState((current) => ({
@@ -164,7 +168,7 @@ function DockExplorer({
         <CardTitle className="text-base text-white">{label}</CardTitle>
       </CardHeader>
       <CardContent className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
-        {dockTemplates.map((dock) => (
+        {builderDockTemplates.map((dock) => (
           <div
             className={[
               "min-w-0 rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-left transition hover:border-violet-300/50 hover:bg-violet-300/10",

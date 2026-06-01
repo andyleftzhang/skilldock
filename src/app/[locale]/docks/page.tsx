@@ -27,10 +27,8 @@ export default async function DocksPage({ params }: Props) {
         activeItem="explore"
         builderHref={`/${locale}#builder`}
         builderLabel={landing("nav.builder")}
-        currentLocale={locale}
         exploreHref={`/${locale}/docks`}
         exploreLabel={landing("nav.explore")}
-        languageLabel={landing("nav.language")}
       />
       <DockList
         docks={dockTemplates}
@@ -46,6 +44,7 @@ export default async function DocksPage({ params }: Props) {
           difficulty: docks("difficulty"),
           enhancements: docks("enhancements"),
           fileName: docks("fileName"),
+          firstTasks: docks("firstTasks"),
           howToUse: docks("howToUse"),
           howToUseIntro: docks("howToUseIntro"),
           includedModules: docks("includedModules"),
@@ -56,10 +55,13 @@ export default async function DocksPage({ params }: Props) {
           recommendedWorkflow: docks("recommendedWorkflow"),
           safetyNotes: docks("safetyNotes"),
           source: docks("source"),
+          supportedTools: docks("supportedTools"),
           tags: docks("tags"),
           title: docks("title"),
           useCases: docks("useCases"),
           viewDetails: docks("viewDetails"),
+          whyFeatured: docks("whyFeatured"),
+          whatItDoes: docks("whatItDoes"),
         }}
       />
     </main>

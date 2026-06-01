@@ -1,4 +1,7 @@
-import { getDefaultDockTemplate, getDockTemplate } from "./dock-catalog";
+import {
+  getBuilderDockTemplate,
+  getDefaultDockTemplate,
+} from "./dock-catalog";
 import type { OutputLanguage } from "./skilldock-types";
 
 export type BuilderState = {
@@ -68,5 +71,5 @@ export function toggleEnhancement(
 }
 
 function getDockForState(selectedDockId: string) {
-  return getDockTemplate(selectedDockId) ?? getDefaultDockTemplate();
+  return getBuilderDockTemplate(selectedDockId) ?? getDefaultDockTemplate();
 }

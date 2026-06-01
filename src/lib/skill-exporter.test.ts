@@ -5,7 +5,7 @@ const state = {
   selectedDockId: "neon-command-deck",
   selectedPersonaId: "python-agent",
   selectedEnhancementIds: ["debug-mode", "security-review"],
-  selectedOutputLocale: "es" as const,
+  selectedOutputLocale: "en" as const,
 };
 
 describe("skill exporter", () => {
@@ -16,7 +16,7 @@ describe("skill exporter", () => {
     expect(artifact.content).toContain("# Neon Command Deck");
     expect(artifact.content).toContain("Paste this into a system prompt");
     expect(artifact.content).toContain("role: Python Agent");
-    expect(artifact.content).toContain("Final instruction: Answer in Spanish.");
+    expect(artifact.content).toContain("Final instruction: Answer in English.");
   });
 
   it("exports Cursor rules as a .cursorrules file", () => {

@@ -8,15 +8,15 @@ describe("seo routes", () => {
     expect(normalizeSiteUrl(undefined)).toBe("https://skilldock.pages.dev");
   });
 
-  it("generates localized homepage, dock list, and dock detail routes", () => {
+  it("generates English homepage, dock list, and dock detail routes", () => {
     const routes = getSeoRoutes("https://skilldock.test/");
     const urls = routes.map((route) => route.url);
 
     expect(urls).toContain("https://skilldock.test/en");
-    expect(urls).toContain("https://skilldock.test/ja/docks");
+    expect(urls).toContain("https://skilldock.test/en/docks");
     expect(urls).toContain(
-      `https://skilldock.test/zh-CN/docks/${dockTemplates[0].id}`,
+      `https://skilldock.test/en/docks/${dockTemplates[0].id}`,
     );
-    expect(routes).toHaveLength(4 + 4 + 4 * dockTemplates.length);
+    expect(routes).toHaveLength(2 + dockTemplates.length);
   });
 });

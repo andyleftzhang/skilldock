@@ -1,22 +1,17 @@
 import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LanguageSwitcher } from "./language-switcher";
 
 type NavbarProps = {
-  currentLocale: string;
   exploreLabel: string;
   builderLabel: string;
-  languageLabel: string;
   exploreHref?: string;
   builderHref?: string;
   activeItem?: "explore" | "builder";
 };
 
 export function Navbar({
-  currentLocale,
   exploreLabel,
   builderLabel,
-  languageLabel,
   exploreHref = "#explore",
   builderHref = "#builder",
   activeItem = "builder",
@@ -53,7 +48,9 @@ export function Navbar({
         </a>
       </nav>
 
-      <LanguageSwitcher currentLocale={currentLocale} label={languageLabel} />
+      <div className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-cyan-100 sm:block">
+        English
+      </div>
     </header>
   );
 }

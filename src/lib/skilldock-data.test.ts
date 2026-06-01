@@ -19,12 +19,7 @@ describe("SkillDock static builder data", () => {
       "debug-mode",
       "security-review",
     ]);
-    expect(outputLanguages.map((item) => item.locale)).toEqual([
-      "en",
-      "ja",
-      "es",
-      "zh-CN",
-    ]);
+    expect(outputLanguages.map((item) => item.locale)).toEqual(["en"]);
     expect(promptPreviewLines.length).toBeGreaterThan(10);
   });
 });

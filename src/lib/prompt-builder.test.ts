@@ -11,7 +11,7 @@ describe("prompt builder", () => {
       selectedDockId: "neon-command-deck",
       selectedPersonaId: "python-agent",
       selectedEnhancementIds: ["debug-mode", "security-review"],
-      selectedOutputLocale: "es" as const,
+      selectedOutputLocale: "en" as const,
     };
 
     expect(buildPromptConfig(state)).toBe(
@@ -29,19 +29,19 @@ describe("prompt builder", () => {
         "  verify_before_handoff: true",
         "output:",
         "  format: implementation-ready guidance",
-        "  language: Spanish",
+        "  language: English",
         "",
-        "Final instruction: Answer in Spanish.",
+        "Final instruction: Answer in English.",
       ].join("\n"),
     );
   });
 
   it("creates the default live preview state", () => {
-    expect(createInitialBuilderState("ja")).toEqual({
+    expect(createInitialBuilderState("en")).toEqual({
       selectedDockId: "neon-command-deck",
       selectedPersonaId: "senior-frontend",
       selectedEnhancementIds: ["clean-code", "debug-mode"],
-      selectedOutputLocale: "ja",
+      selectedOutputLocale: "en",
     });
   });
 

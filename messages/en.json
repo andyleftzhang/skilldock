@@ -10,10 +10,10 @@
       "language": "Language"
     },
     "hero": {
-      "headline": "Build portable AI skill packs for your tools.",
-      "highlightA": "Skill pack exports",
-      "highlightB": "Rules + prompts + workflows",
-      "subtitle": "Pick personas, rules, and output constraints. SkillDock turns reusable AI skill patterns into prompts, project rules, or SKILL.md-style bundles you can copy or download."
+      "headline": "Hand-picked AI skills, with practical install and usage guides.",
+      "highlightA": "Curated skills",
+      "highlightB": "Install + first-run guides",
+      "subtitle": "SkillDock helps you understand which GitHub AI skills are worth using, where they fit, how to install them, and the first tasks to try."
     },
     "preview": {
       "title": "Container Box",
@@ -50,7 +50,7 @@
   },
   "Docks": {
     "title": "Explore Docks",
-    "intro": "Browse reusable AI skill templates, inspect their personas and rules, then return to the builder to assemble a config.",
+    "intro": "Browse curated AI skills, learn who they are for, how to install them, what to try first, and what mistakes to avoid.",
     "backToDocks": "Back to Docks",
     "backToBuilder": "Use in Builder",
     "bestFor": "Best for",
@@ -61,17 +61,21 @@
     "difficulty": "Difficulty",
     "enhancements": "Enhancements",
     "fileName": "File",
+    "firstTasks": "First tasks to try",
     "howToUse": "How to use",
     "howToUseIntro": "Select this Dock in the builder, choose the persona that matches your task, then add only the rules that improve the current workflow.",
-    "includedModules": "Included modules",
+    "includedModules": "Included content",
     "license": "License",
     "origin": "Origin",
     "personas": "Personas",
     "recommendedWorkflow": "Recommended workflow",
     "safetyNotes": "Safety notes",
     "source": "Source",
+    "supportedTools": "Supported tools",
     "tags": "Tags",
     "useCases": "Use cases",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "whyFeatured": "Why it is featured",
+    "whatItDoes": "What it helps you do"
   }
 }

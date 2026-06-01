@@ -14,17 +14,24 @@ import type { DockTemplate } from "@/lib/dock-catalog";
 export type DockPageMessages = {
   backToDocks: string;
   backToBuilder: string;
+  bestFor: string;
   builder: string;
+  curated: string;
   details: string;
   difficulty: string;
   enhancements: string;
+  includedModules: string;
+  howToUse: string;
+  howToUseIntro: string;
   license: string;
   origin: string;
   personas: string;
+  recommendedWorkflow: string;
   source: string;
   tags: string;
   title: string;
   intro: string;
+  useCases: string;
   viewDetails: string;
 };
 
@@ -72,6 +79,7 @@ export function DockList({ docks, locale, messages }: DockListProps) {
             </CardHeader>
             <CardContent className="flex flex-col gap-5">
               <DockMetaGrid dock={dock} messages={messages} />
+              <StatRow dock={dock} messages={messages} />
               <TagRow tags={dock.tags} />
               <Button asChild className="w-full bg-cyan-300 text-slate-950 hover:bg-cyan-200">
                 <Link href={`/${locale}/docks/${dock.id}`}>{messages.viewDetails}</Link>
@@ -96,7 +104,7 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
             {dock.sourceType}
           </Badge>
           <h1 className="mt-4 text-balance text-5xl font-semibold leading-[0.95] tracking-[-0.08em] text-white sm:text-6xl">
-            {dock.title}
+            {dock.headline}
           </h1>
           <p className="mt-5 text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
             {dock.summary}
@@ -104,6 +112,7 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
         </div>
         <DockMetaGrid dock={dock} messages={messages} />
         <TagRow tags={dock.tags} />
+        <StatRow dock={dock} messages={messages} />
         <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
           <Link href={`/${locale}?dock=${dock.id}#builder`}>{messages.backToBuilder}</Link>
         </Button>
@@ -114,6 +123,35 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
           <CardTitle className="text-white">{messages.details}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
+          <ContentSection title={messages.useCases} items={dock.useCases} />
+
+          <Separator className="bg-white/10" />
+
+          <ContentSection title={messages.bestFor} items={dock.recommendedFor} />
+
+          <Separator className="bg-white/10" />
+
+          <ContentSection title={messages.includedModules} items={dock.includedModules} />
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex flex-col gap-2">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200">
+              {messages.howToUse}
+            </h2>
+            <p className="text-sm leading-6 text-muted-foreground">
+              {messages.howToUseIntro}
+            </p>
+          </div>
+
+          <ContentSection
+            ordered
+            title={messages.recommendedWorkflow}
+            items={dock.recommendedWorkflow}
+          />
+
+          <Separator className="bg-white/10" />
+
           <Shelf title={messages.personas}>
             {dock.personas.map((persona) => (
               <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4" key={persona.id}>
@@ -157,6 +195,7 @@ function DockMetaGrid({
 }) {
   const items = [
     [messages.difficulty, dock.difficulty],
+    [messages.curated, dock.lastCuratedAt],
     [messages.origin, dock.promptMeta.origin],
     [messages.license, dock.promptMeta.license],
     [messages.source, dock.promptMeta.sourceUrl],
@@ -172,6 +211,61 @@ function DockMetaGrid({
           <div className="mt-1 break-words text-slate-200">{value}</div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function StatRow({
+  dock,
+  messages,
+}: {
+  dock: DockTemplate;
+  messages: DockPageMessages;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground sm:grid-cols-4">
+      <Stat label={messages.personas} value={`${dock.personas.length}`} />
+      <Stat label={messages.enhancements} value={`${dock.enhancements.length}`} />
+      <Stat label={messages.useCases} value={`${dock.useCases.length}`} />
+      <Stat label={messages.tags} value={`${dock.tags.length}`} />
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+      <div className="text-lg font-semibold text-white">{value}</div>
+      <div className="mt-1 text-[0.68rem] uppercase tracking-[0.18em] text-cyan-200/80">
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function ContentSection({
+  items,
+  ordered = false,
+  title,
+}: {
+  items: string[];
+  ordered?: boolean;
+  title: string;
+}) {
+  const List = ordered ? "ol" : "ul";
+
+  return (
+    <div className="flex flex-col gap-3">
+      <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200">
+        {title}
+      </h2>
+      <List className="flex flex-col gap-2 text-sm leading-6 text-muted-foreground">
+        {items.map((item) => (
+          <li className={ordered ? "ml-5 list-decimal" : "ml-5 list-disc"} key={item}>
+            {item}
+          </li>
+        ))}
+      </List>
     </div>
   );
 }

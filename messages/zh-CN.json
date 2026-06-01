@@ -38,15 +38,22 @@
     "intro": "浏览可复用的 AI 技能模板，查看它们的角色与规则，再回到构建器拼装配置。",
     "backToDocks": "返回 Docks",
     "backToBuilder": "在构建器中使用",
+    "bestFor": "适合人群",
     "builder": "默认",
+    "curated": "整理日期",
     "details": "Dock 详情",
     "difficulty": "难度",
     "enhancements": "增强规则",
+    "howToUse": "如何使用",
+    "howToUseIntro": "在构建器中选择这个 Dock，挑选匹配当前任务的角色，再只添加能改善当前流程的规则。",
+    "includedModules": "包含模块",
     "license": "许可证",
     "origin": "来源",
     "personas": "角色",
+    "recommendedWorkflow": "推荐工作流",
     "source": "源地址",
     "tags": "标签",
+    "useCases": "使用场景",
     "viewDetails": "查看详情"
   }
 }

@@ -38,15 +38,22 @@
     "intro": "Explora plantillas reutilizables de habilidades de IA, revisa sus personas y reglas, y vuelve al builder para ensamblar una config.",
     "backToDocks": "Volver a Docks",
     "backToBuilder": "Usar en Builder",
+    "bestFor": "Ideal para",
     "builder": "Predeterminado",
+    "curated": "Curado",
     "details": "Detalles del Dock",
     "difficulty": "Dificultad",
     "enhancements": "Mejoras",
+    "howToUse": "Cómo usar",
+    "howToUseIntro": "Selecciona este Dock en el builder, elige la persona que encaja con tu tarea y agrega solo las reglas que mejoran el flujo actual.",
+    "includedModules": "Módulos incluidos",
     "license": "Licencia",
     "origin": "Origen",
     "personas": "Personas",
+    "recommendedWorkflow": "Flujo recomendado",
     "source": "Fuente",
     "tags": "Etiquetas",
+    "useCases": "Casos de uso",
     "viewDetails": "Ver detalles"
   }
 }

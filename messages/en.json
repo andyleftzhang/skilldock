@@ -38,15 +38,22 @@
     "intro": "Browse reusable AI skill templates, inspect their personas and rules, then return to the builder to assemble a config.",
     "backToDocks": "Back to Docks",
     "backToBuilder": "Use in Builder",
+    "bestFor": "Best for",
     "builder": "Default",
+    "curated": "Curated",
     "details": "Dock Details",
     "difficulty": "Difficulty",
     "enhancements": "Enhancements",
+    "howToUse": "How to use",
+    "howToUseIntro": "Select this Dock in the builder, choose the persona that matches your task, then add only the rules that improve the current workflow.",
+    "includedModules": "Included modules",
     "license": "License",
     "origin": "Origin",
     "personas": "Personas",
+    "recommendedWorkflow": "Recommended workflow",
     "source": "Source",
     "tags": "Tags",
+    "useCases": "Use cases",
     "viewDetails": "View Details"
   }
 }

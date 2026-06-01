@@ -38,15 +38,22 @@
     "intro": "再利用できる AI スキルテンプレートを確認し、ペルソナやルールを見てからビルダーで設定を組み立てられます。",
     "backToDocks": "Dock 一覧へ戻る",
     "backToBuilder": "ビルダーで使う",
+    "bestFor": "おすすめ対象",
     "builder": "デフォルト",
+    "curated": "キュレーション日",
     "details": "Dock 詳細",
     "difficulty": "難易度",
     "enhancements": "拡張設定",
+    "howToUse": "使い方",
+    "howToUseIntro": "ビルダーでこの Dock を選び、タスクに合うペルソナを選択して、現在のワークフローに必要なルールだけを追加します。",
+    "includedModules": "含まれるモジュール",
     "license": "ライセンス",
     "origin": "出典",
     "personas": "ペルソナ",
+    "recommendedWorkflow": "おすすめワークフロー",
     "source": "ソース",
     "tags": "タグ",
+    "useCases": "ユースケース",
     "viewDetails": "詳細を見る"
   }
 }

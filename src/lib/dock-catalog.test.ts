@@ -13,6 +13,12 @@ describe("dock catalog", () => {
     expect(dockTemplates.length).toBeGreaterThan(1);
     expect(dock.sourceType).toBe("cursor-rules");
     expect(dock.tags).toContain("prompt-engineering");
+    expect(dock.headline).toContain("Build");
+    expect(dock.useCases.length).toBeGreaterThan(2);
+    expect(dock.includedModules).toContain("Persona presets");
+    expect(dock.recommendedFor).toContain("Frontend teams");
+    expect(dock.recommendedWorkflow.length).toBeGreaterThan(2);
+    expect(dock.lastCuratedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(dock.promptMeta.sourceUrl).toContain("github.com");
     expect(dock.personas.map((persona) => persona.id)).toEqual([
       "senior-frontend",

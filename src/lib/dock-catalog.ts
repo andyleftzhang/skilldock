@@ -5,10 +5,16 @@ export type DockSourceType = "cursor-rules" | "prompt-pack" | "agent-config";
 export type DockTemplate = {
   id: string;
   title: string;
+  headline: string;
   summary: string;
   sourceType: DockSourceType;
   difficulty: "starter" | "advanced";
   tags: string[];
+  useCases: string[];
+  includedModules: string[];
+  recommendedFor: string[];
+  recommendedWorkflow: string[];
+  lastCuratedAt: string;
   promptMeta: {
     origin: string;
     sourceUrl: string;
@@ -55,11 +61,36 @@ export const dockTemplates: DockTemplate[] = [
   {
     id: "neon-command-deck",
     title: "Neon Command Deck",
+    headline: "Build modular AI coding prompts from reusable command modules.",
     summary:
       "A modular AI skill builder for assembling persona, workflow, and output constraints.",
     sourceType: "cursor-rules",
     difficulty: "starter",
     tags: ["frontend", "agents", "prompt-engineering", "config"],
+    useCases: [
+      "Create a polished .cursorrules-style prompt for frontend work.",
+      "Compose coding assistant behavior without writing prompts from scratch.",
+      "Standardize response tone, verification, and output language for AI tools.",
+    ],
+    includedModules: [
+      "Persona presets",
+      "Clean code and debugging rules",
+      "Accessibility and security review options",
+      "Multilingual output constraints",
+    ],
+    recommendedFor: [
+      "Frontend teams",
+      "Solo builders",
+      "Prompt engineers",
+      "AI coding workflow experiments",
+    ],
+    recommendedWorkflow: [
+      "Start with Senior Frontend for UI implementation tasks.",
+      "Enable Debug Mode when investigating failures or uncertain code paths.",
+      "Add Security Review before shipping auth, data, or configuration changes.",
+      "Choose the output language last so the final instruction is explicit.",
+    ],
+    lastCuratedAt: "2026-06-01",
     promptMeta: {
       origin: "SkillDock curated starter",
       sourceUrl: "https://github.com/search?q=.cursorrules&type=repositories",
@@ -129,11 +160,36 @@ export const dockTemplates: DockTemplate[] = [
   {
     id: "code-review-guardrails",
     title: "Code Review Guardrails",
+    headline: "Review code changes with risk, regression, and release guardrails.",
     summary:
       "A review-focused prompt dock for risk checks, regression spotting, and handoff quality.",
     sourceType: "prompt-pack",
     difficulty: "advanced",
     tags: ["code-review", "quality", "security", "handoff"],
+    useCases: [
+      "Generate a code review prompt that focuses on concrete regressions.",
+      "Prepare high-signal review notes before merging risky changes.",
+      "Create release readiness guidance for handoffs and launch reviews.",
+    ],
+    includedModules: [
+      "Principal reviewer persona",
+      "Release readiness persona",
+      "Regression mapping rule",
+      "Security and handoff checks",
+    ],
+    recommendedFor: [
+      "Maintainers",
+      "Engineering leads",
+      "QA reviewers",
+      "Launch owners",
+    ],
+    recommendedWorkflow: [
+      "Use Principal Reviewer for pull request review and architecture concerns.",
+      "Switch to Release Sentinel when the change is close to production.",
+      "Keep Regression Map enabled for behavior-changing patches.",
+      "Add Handoff Check when the review should produce follow-up tasks.",
+    ],
+    lastCuratedAt: "2026-06-01",
     promptMeta: {
       origin: "SkillDock curated review pack",
       sourceUrl: "https://github.com/search?q=awesome+code+review+prompts&type=repositories",

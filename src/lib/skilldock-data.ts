@@ -5,9 +5,9 @@ export type { Enhancement, OutputLanguage, Persona } from "./skilldock-types";
 
 const defaultDock = getDefaultDockTemplate();
 
-export const personas: Persona[] = defaultDock.personas;
-export const enhancements: Enhancement[] = defaultDock.enhancements;
-export const outputLanguages: OutputLanguage[] = defaultDock.outputLanguages;
+export const personas: Persona[] = defaultDock.builder.personas;
+export const enhancements: Enhancement[] = defaultDock.builder.enhancements;
+export const outputLanguages: OutputLanguage[] = defaultDock.builder.outputLanguages;
 
 export const promptPreviewLines = [
   "dock: skilldock/neon-command-deck",

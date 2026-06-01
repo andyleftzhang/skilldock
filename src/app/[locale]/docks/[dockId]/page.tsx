@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${dock.title} | SkillDock`,
-    description: dock.summary,
+    description: dock.shortDescription,
   };
 }
 
@@ -62,10 +62,12 @@ export default async function DockDetailPage({ params }: Props) {
           backToDocks: docks("backToDocks"),
           bestFor: docks("bestFor"),
           builder: docks("builder"),
+          category: docks("category"),
           curated: docks("curated"),
           details: docks("details"),
           difficulty: docks("difficulty"),
           enhancements: docks("enhancements"),
+          fileName: docks("fileName"),
           howToUse: docks("howToUse"),
           howToUseIntro: docks("howToUseIntro"),
           includedModules: docks("includedModules"),
@@ -74,6 +76,7 @@ export default async function DockDetailPage({ params }: Props) {
           origin: docks("origin"),
           personas: docks("personas"),
           recommendedWorkflow: docks("recommendedWorkflow"),
+          safetyNotes: docks("safetyNotes"),
           source: docks("source"),
           tags: docks("tags"),
           title: docks("title"),

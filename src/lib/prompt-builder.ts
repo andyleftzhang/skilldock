@@ -10,15 +10,16 @@ export type BuilderState = {
 
 export function buildPromptConfig(state: BuilderState) {
   const dock = getDockForState(state.selectedDockId);
+  const { builder } = dock;
   const persona =
-    dock.personas.find((item) => item.id === state.selectedPersonaId) ??
-    dock.personas[0];
-  const selectedEnhancements = dock.enhancements.filter((item) =>
+    builder.personas.find((item) => item.id === state.selectedPersonaId) ??
+    builder.personas[0];
+  const selectedEnhancements = builder.enhancements.filter((item) =>
     state.selectedEnhancementIds.includes(item.id),
   );
   const outputLanguage =
-    dock.outputLanguages.find((item) => item.locale === state.selectedOutputLocale) ??
-    dock.outputLanguages[0];
+    builder.outputLanguages.find((item) => item.locale === state.selectedOutputLocale) ??
+    builder.outputLanguages[0];
 
   return [
     `dock: skilldock/${dock.id}`,
@@ -49,8 +50,8 @@ export function createInitialBuilderState(
 
   return {
     selectedDockId: dock.id,
-    selectedPersonaId: dock.defaultSelection.personaId,
-    selectedEnhancementIds: [...dock.defaultSelection.enhancementIds],
+    selectedPersonaId: dock.builder.defaultSelection.personaId,
+    selectedEnhancementIds: [...dock.builder.defaultSelection.enhancementIds],
     selectedOutputLocale,
   };
 }

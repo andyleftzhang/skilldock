@@ -10,23 +10,29 @@ describe("dock catalog", () => {
     const dock = getDefaultDockTemplate();
 
     expect(dock.id).toBe("neon-command-deck");
+    expect(dock.slug).toBe("neon-command-deck");
+    expect(dock.fileName).toBe(".cursorrules");
     expect(dockTemplates.length).toBeGreaterThan(1);
-    expect(dock.sourceType).toBe("cursor-rules");
-    expect(dock.tags).toContain("prompt-engineering");
+    expect(dock.source.type).toBe("curated");
+    expect(dock.taxonomy.category).toBe("Development");
+    expect(dock.taxonomy.tags).toContain("prompt-engineering");
     expect(dock.headline).toContain("Build");
-    expect(dock.useCases.length).toBeGreaterThan(2);
-    expect(dock.includedModules).toContain("Persona presets");
-    expect(dock.recommendedFor).toContain("Frontend teams");
-    expect(dock.recommendedWorkflow.length).toBeGreaterThan(2);
-    expect(dock.lastCuratedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-    expect(dock.promptMeta.sourceUrl).toContain("github.com");
-    expect(dock.personas.map((persona) => persona.id)).toEqual([
+    expect(dock.shortDescription).toContain("modular");
+    expect(dock.content.useCases.length).toBeGreaterThan(2);
+    expect(dock.content.includedModules).toContain("Persona presets");
+    expect(dock.content.recommendedFor).toContain("Frontend teams");
+    expect(dock.content.recommendedWorkflow.length).toBeGreaterThan(2);
+    expect(dock.content.safetyNotes.length).toBeGreaterThan(0);
+    expect(dock.source.lastUpdated).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(dock.source.url).toContain("github.com");
+    expect(dock.stats.moduleCount).toBeGreaterThan(0);
+    expect(dock.builder.personas.map((persona) => persona.id)).toEqual([
       "senior-frontend",
       "python-agent",
       "prompt-engineer",
       "code-reviewer",
     ]);
-    expect(dock.enhancements.map((enhancement) => enhancement.id)).toEqual([
+    expect(dock.builder.enhancements.map((enhancement) => enhancement.id)).toEqual([
       "clean-code",
       "debug-mode",
       "security-review",
@@ -35,18 +41,19 @@ describe("dock catalog", () => {
 
   it("keeps default selections valid for the default dock", () => {
     const dock = getDefaultDockTemplate();
+    const { builder } = dock;
 
-    expect(dock.personas.some((item) => item.id === dock.defaultSelection.personaId)).toBe(
-      true,
-    );
     expect(
-      dock.defaultSelection.enhancementIds.every((id) =>
-        dock.enhancements.some((item) => item.id === id),
+      builder.personas.some((item) => item.id === builder.defaultSelection.personaId),
+    ).toBe(true);
+    expect(
+      builder.defaultSelection.enhancementIds.every((id) =>
+        builder.enhancements.some((item) => item.id === id),
       ),
     ).toBe(true);
     expect(
-      dock.outputLanguages.some(
-        (item) => item.locale === dock.defaultSelection.outputLocale,
+      builder.outputLanguages.some(
+        (item) => item.locale === builder.defaultSelection.outputLocale,
       ),
     ).toBe(true);
   });
@@ -62,11 +69,11 @@ describe("dock catalog", () => {
   it("allows each dock to define independent builder shelves", () => {
     const reviewDock = getDockTemplate("code-review-guardrails");
 
-    expect(reviewDock?.personas.map((persona) => persona.id)).toEqual([
+    expect(reviewDock?.builder.personas.map((persona) => persona.id)).toEqual([
       "principal-reviewer",
       "release-sentinel",
     ]);
-    expect(reviewDock?.defaultSelection.enhancementIds).toEqual([
+    expect(reviewDock?.builder.defaultSelection.enhancementIds).toEqual([
       "regression-map",
       "security-review",
     ]);

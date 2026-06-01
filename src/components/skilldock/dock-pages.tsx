@@ -16,10 +16,12 @@ export type DockPageMessages = {
   backToBuilder: string;
   bestFor: string;
   builder: string;
+  category: string;
   curated: string;
   details: string;
   difficulty: string;
   enhancements: string;
+  fileName: string;
   includedModules: string;
   howToUse: string;
   howToUseIntro: string;
@@ -27,6 +29,7 @@ export type DockPageMessages = {
   origin: string;
   personas: string;
   recommendedWorkflow: string;
+  safetyNotes: string;
   source: string;
   tags: string;
   title: string;
@@ -71,16 +74,18 @@ export function DockList({ docks, locale, messages }: DockListProps) {
             <CardHeader>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <CardTitle className="text-xl text-white">{dock.title}</CardTitle>
-                <Badge variant={dock.difficulty === "starter" ? "default" : "secondary"}>
-                  {dock.difficulty}
+                <Badge variant={dock.taxonomy.difficulty === "starter" ? "default" : "secondary"}>
+                  {dock.taxonomy.difficulty}
                 </Badge>
               </div>
-              <p className="text-sm leading-6 text-muted-foreground">{dock.summary}</p>
+              <p className="text-sm leading-6 text-muted-foreground">
+                {dock.shortDescription}
+              </p>
             </CardHeader>
             <CardContent className="flex flex-col gap-5">
               <DockMetaGrid dock={dock} messages={messages} />
               <StatRow dock={dock} messages={messages} />
-              <TagRow tags={dock.tags} />
+              <TagRow tags={dock.taxonomy.tags} />
               <Button asChild className="w-full bg-cyan-300 text-slate-950 hover:bg-cyan-200">
                 <Link href={`/${locale}/docks/${dock.id}`}>{messages.viewDetails}</Link>
               </Button>
@@ -101,17 +106,17 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
         </Link>
         <div>
           <Badge className="border-fuchsia-300/20 bg-fuchsia-300/10 text-fuchsia-100" variant="outline">
-            {dock.sourceType}
+            {dock.fileName}
           </Badge>
           <h1 className="mt-4 text-balance text-5xl font-semibold leading-[0.95] tracking-[-0.08em] text-white sm:text-6xl">
             {dock.headline}
           </h1>
           <p className="mt-5 text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
-            {dock.summary}
+            {dock.longDescription}
           </p>
         </div>
         <DockMetaGrid dock={dock} messages={messages} />
-        <TagRow tags={dock.tags} />
+        <TagRow tags={dock.taxonomy.tags} />
         <StatRow dock={dock} messages={messages} />
         <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
           <Link href={`/${locale}?dock=${dock.id}#builder`}>{messages.backToBuilder}</Link>
@@ -123,15 +128,18 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
           <CardTitle className="text-white">{messages.details}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
-          <ContentSection title={messages.useCases} items={dock.useCases} />
+          <ContentSection title={messages.useCases} items={dock.content.useCases} />
 
           <Separator className="bg-white/10" />
 
-          <ContentSection title={messages.bestFor} items={dock.recommendedFor} />
+          <ContentSection title={messages.bestFor} items={dock.content.recommendedFor} />
 
           <Separator className="bg-white/10" />
 
-          <ContentSection title={messages.includedModules} items={dock.includedModules} />
+          <ContentSection
+            title={messages.includedModules}
+            items={dock.content.includedModules}
+          />
 
           <Separator className="bg-white/10" />
 
@@ -147,13 +155,17 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
           <ContentSection
             ordered
             title={messages.recommendedWorkflow}
-            items={dock.recommendedWorkflow}
+            items={dock.content.recommendedWorkflow}
           />
 
           <Separator className="bg-white/10" />
 
+          <ContentSection title={messages.safetyNotes} items={dock.content.safetyNotes} />
+
+          <Separator className="bg-white/10" />
+
           <Shelf title={messages.personas}>
-            {dock.personas.map((persona) => (
+            {dock.builder.personas.map((persona) => (
               <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4" key={persona.id}>
                 <div className="flex items-center justify-between gap-3">
                   <h2 className="font-semibold text-white">{persona.title}</h2>
@@ -168,7 +180,7 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
           <Separator className="bg-white/10" />
 
           <Shelf title={messages.enhancements}>
-            {dock.enhancements.map((enhancement) => (
+            {dock.builder.enhancements.map((enhancement) => (
               <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4" key={enhancement.id}>
                 <div className="flex items-center justify-between gap-3">
                   <h2 className="font-semibold text-white">+ {enhancement.label}</h2>
@@ -194,11 +206,12 @@ function DockMetaGrid({
   messages: DockPageMessages;
 }) {
   const items = [
-    [messages.difficulty, dock.difficulty],
-    [messages.curated, dock.lastCuratedAt],
-    [messages.origin, dock.promptMeta.origin],
-    [messages.license, dock.promptMeta.license],
-    [messages.source, dock.promptMeta.sourceUrl],
+    [messages.fileName, dock.fileName],
+    [messages.category, dock.taxonomy.category],
+    [messages.curated, dock.source.lastUpdated],
+    [messages.origin, dock.source.repo ?? dock.source.author],
+    [messages.license, dock.source.license],
+    [messages.source, dock.source.url ?? dock.source.type],
   ];
 
   return (
@@ -224,10 +237,10 @@ function StatRow({
 }) {
   return (
     <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground sm:grid-cols-4">
-      <Stat label={messages.personas} value={`${dock.personas.length}`} />
-      <Stat label={messages.enhancements} value={`${dock.enhancements.length}`} />
-      <Stat label={messages.useCases} value={`${dock.useCases.length}`} />
-      <Stat label={messages.tags} value={`${dock.tags.length}`} />
+      <Stat label={messages.personas} value={`${dock.builder.personas.length}`} />
+      <Stat label={messages.enhancements} value={`${dock.builder.enhancements.length}`} />
+      <Stat label={messages.includedModules} value={`${dock.stats.moduleCount}`} />
+      <Stat label={messages.tags} value={`${dock.taxonomy.tags.length}`} />
     </div>
   );
 }

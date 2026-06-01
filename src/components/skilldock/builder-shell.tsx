@@ -69,16 +69,17 @@ export function BuilderShell({
           locale={locale}
           onDockSelect={(dockId) => {
             const dock = getDockTemplate(dockId) ?? dockTemplates[0];
+            const { builder } = dock;
 
             setBuilderState((current) => ({
               selectedDockId: dock.id,
-              selectedPersonaId: dock.defaultSelection.personaId,
-              selectedEnhancementIds: [...dock.defaultSelection.enhancementIds],
-              selectedOutputLocale: dock.outputLanguages.some(
+              selectedPersonaId: builder.defaultSelection.personaId,
+              selectedEnhancementIds: [...builder.defaultSelection.enhancementIds],
+              selectedOutputLocale: builder.outputLanguages.some(
                 (language) => language.locale === current.selectedOutputLocale,
               )
                 ? current.selectedOutputLocale
-                : dock.defaultSelection.outputLocale,
+                : builder.defaultSelection.outputLocale,
             }));
           }}
           viewDetailsLabel={panel.viewDetailsLabel}
@@ -93,7 +94,7 @@ export function BuilderShell({
         />
       </div>
       <DockingPanel
-        enhancements={selectedDock.enhancements}
+        enhancements={selectedDock.builder.enhancements}
         enhancementsLabel={panel.enhancementsLabel}
         onEnhancementToggle={(enhancementId) => {
           setBuilderState((current) => ({
@@ -117,8 +118,8 @@ export function BuilderShell({
           }));
         }}
         outputLanguageLabel={panel.outputLanguageLabel}
-        outputLanguages={selectedDock.outputLanguages}
-        personas={selectedDock.personas}
+        outputLanguages={selectedDock.builder.outputLanguages}
+        personas={selectedDock.builder.personas}
         personasLabel={panel.personasLabel}
         selectedEnhancementIds={builderState.selectedEnhancementIds}
         selectedOutputLocale={builderState.selectedOutputLocale}
@@ -166,27 +167,29 @@ function DockExplorer({
             >
               <div className="flex items-start justify-between gap-3">
                 <span className="text-sm font-semibold text-white">{dock.title}</span>
-                <Badge variant={dock.difficulty === "starter" ? "default" : "secondary"}>
-                  {dock.sourceType}
+                <Badge variant={dock.taxonomy.difficulty === "starter" ? "default" : "secondary"}>
+                  {dock.fileName}
                 </Badge>
               </div>
-              <p className="mt-2 text-xs leading-5 text-muted-foreground">{dock.summary}</p>
+              <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                {dock.shortDescription}
+              </p>
               <div className="mt-3 grid grid-cols-2 gap-2 text-[0.68rem] text-muted-foreground">
                 <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
-                  {dock.personas.length} personas
+                  {dock.builder.personas.length} personas
                 </span>
                 <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
-                  {dock.enhancements.length} rules
+                  {dock.builder.enhancements.length} rules
                 </span>
                 <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
-                  {dock.promptMeta.origin}
+                  {dock.taxonomy.category}
                 </span>
                 <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
-                  {dock.promptMeta.license}
+                  {dock.stats.popularityLabel}
                 </span>
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                {dock.tags.map((tag) => (
+                {dock.taxonomy.tags.map((tag) => (
                   <Badge
                     className="border-white/10 bg-white/5 text-[0.68rem] text-cyan-100"
                     key={tag}

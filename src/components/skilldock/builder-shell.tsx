@@ -70,7 +70,7 @@ export function BuilderShell({
 
   return (
     <>
-      <div className="flex flex-col gap-6">
+      <div className="min-w-0 flex flex-col gap-6">
         {children}
         <DockExplorer
           currentDockId={selectedDock.id}
@@ -159,22 +159,22 @@ function DockExplorer({
   viewDetailsLabel: string;
 }) {
   return (
-    <Card className="border-violet-300/20 bg-slate-950/60 shadow-[0_18px_80px_rgba(139,92,246,0.12)] backdrop-blur-xl">
+    <Card className="min-w-0 border-violet-300/20 bg-slate-950/60 shadow-[0_18px_80px_rgba(139,92,246,0.12)] backdrop-blur-xl">
       <CardHeader>
         <CardTitle className="text-base text-white">{label}</CardTitle>
       </CardHeader>
-      <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <CardContent className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
         {dockTemplates.map((dock) => (
           <div
             className={[
-              "rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-left transition hover:border-violet-300/50 hover:bg-violet-300/10",
+              "min-w-0 rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-left transition hover:border-violet-300/50 hover:bg-violet-300/10",
               dock.id === currentDockId ? "border-violet-300/50 bg-violet-300/10" : "",
             ].join(" ")}
             key={dock.id}
           >
             <button
               aria-pressed={dock.id === currentDockId}
-              className="w-full text-left"
+              className="w-full min-w-0 text-left"
               onClick={() => onDockSelect(dock.id)}
               type="button"
             >

@@ -47,7 +47,7 @@ export function DockingPanel({
   onOutputLanguageChange,
 }: DockingPanelProps) {
   return (
-    <Card className="border-fuchsia-300/20 bg-slate-950/70 shadow-[0_24px_120px_rgba(236,72,153,0.16)] backdrop-blur-xl">
+    <Card className="min-w-0 border-fuchsia-300/20 bg-slate-950/70 shadow-[0_24px_120px_rgba(236,72,153,0.16)] backdrop-blur-xl">
       <CardHeader>
         <CardTitle className="text-base text-white">Docking Panel</CardTitle>
       </CardHeader>

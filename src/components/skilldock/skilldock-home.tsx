@@ -53,7 +53,7 @@ export function SkillDockHome({ locale, messages }: SkillDockHomeProps) {
         languageLabel={messages.navLanguage}
       />
       <section
-        className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 px-5 pb-14 pt-8 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:pb-20 lg:pt-10"
+        className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 px-5 pb-14 pt-8 sm:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-end lg:pb-20 lg:pt-10"
         id="builder"
       >
         <Suspense>

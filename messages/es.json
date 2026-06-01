@@ -10,17 +10,32 @@
       "language": "Idioma"
     },
     "hero": {
-      "headline": "Ensambla habilidades de IA como módulos de comando.",
-      "highlightA": "Prompts modulares",
-      "highlightB": "Vista previa en vivo",
-      "subtitle": "Elige personas, reglas y restricciones de salida. SkillDock convierte patrones abiertos de habilidades de IA en un prompt/config listo para copiar o descargar."
+      "headline": "Crea skill packs portables para tus herramientas de IA.",
+      "highlightA": "Exports de skill pack",
+      "highlightB": "Reglas + prompts + workflows",
+      "subtitle": "Elige personas, reglas y restricciones de salida. SkillDock convierte patrones reutilizables de habilidades de IA en prompts, reglas de proyecto o bundles estilo SKILL.md."
     },
     "preview": {
       "title": "Caja contenedora",
-      "format": "Prompt/config generado",
+      "format": "Export de skill generado",
       "copy": "Copiar al portapapeles",
       "copied": "Copiado",
-      "download": "Descargar config"
+      "download": "Descargar export",
+      "exportAs": "Exportar como",
+      "targets": {
+        "universalPrompt": {
+          "label": "Prompt universal",
+          "description": "Pégalo en system prompts, instrucciones de proyecto o un chat nuevo."
+        },
+        "cursorRules": {
+          "label": "Cursor Rules",
+          "description": "Descarga un .cursorrules para reglas de proyecto en Cursor."
+        },
+        "codexSkillPack": {
+          "label": "Codex Skill Pack",
+          "description": "Exporta un paquete estilo SKILL.md para flujos de agente reutilizables."
+        }
+      }
     },
     "panel": {
       "docks": "Explorar Docks",

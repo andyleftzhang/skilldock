@@ -8,14 +8,16 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { dockTemplates, getDockTemplate } from "@/lib/dock-catalog";
 import {
-  buildPromptConfig,
   createInitialBuilderState,
   toggleEnhancement,
 } from "@/lib/prompt-builder";
 import type { BuilderState } from "@/lib/prompt-builder";
+import { buildSkillExport } from "@/lib/skill-exporter";
+import type { ExportTargetId } from "@/lib/skill-exporter";
 import type { OutputLanguage } from "@/lib/skilldock-types";
 import { DockingPanel } from "./docking-panel";
 import { PromptPreview } from "./prompt-preview";
+import type { ExportTargetOption } from "./prompt-preview";
 
 type BuilderShellProps = {
   children: ReactNode;
@@ -26,6 +28,8 @@ type BuilderShellProps = {
     copyLabel: string;
     copiedLabel: string;
     downloadLabel: string;
+    exportAsLabel: string;
+    exportTargets: ExportTargetOption[];
   };
   panel: {
     docksLabel: string;
@@ -55,9 +59,14 @@ export function BuilderShell({
   const [builderState, setBuilderState] = useState<BuilderState>(() =>
     createInitialBuilderState(initialLocale, initialDockId),
   );
+  const [selectedExportTargetId, setSelectedExportTargetId] =
+    useState<ExportTargetId>("universal-prompt");
 
   const selectedDock = getDockTemplate(builderState.selectedDockId) ?? dockTemplates[0];
-  const promptConfig = useMemo(() => buildPromptConfig(builderState), [builderState]);
+  const exportArtifact = useMemo(
+    () => buildSkillExport(builderState, selectedExportTargetId),
+    [builderState, selectedExportTargetId],
+  );
 
   return (
     <>
@@ -88,8 +97,12 @@ export function BuilderShell({
           copiedLabel={preview.copiedLabel}
           copyLabel={preview.copyLabel}
           downloadLabel={preview.downloadLabel}
+          exportArtifact={exportArtifact}
+          exportAsLabel={preview.exportAsLabel}
+          exportTargets={preview.exportTargets}
           format={preview.format}
-          promptConfig={promptConfig}
+          onExportTargetChange={setSelectedExportTargetId}
+          selectedExportTargetId={selectedExportTargetId}
           title={preview.title}
         />
       </div>

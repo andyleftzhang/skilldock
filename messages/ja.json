@@ -10,17 +10,32 @@
       "language": "言語"
     },
     "hero": {
-      "headline": "AI スキルをコマンドモジュールのように組み立てる。",
-      "highlightA": "モジュール式プロンプト",
-      "highlightB": "リアルタイム設定プレビュー",
-      "subtitle": "ペルソナ、ルール、出力条件を選ぶだけ。SkillDock はオープンな AI スキルパターンを、コピーやダウンロードしやすいプロンプト/設定に整えます。"
+      "headline": "AI ツール向けのポータブル Skill Pack を作る。",
+      "highlightA": "Skill Pack エクスポート",
+      "highlightB": "ルール + プロンプト + ワークフロー",
+      "subtitle": "ペルソナ、ルール、出力条件を選ぶだけ。SkillDock は再利用できる AI スキルパターンを、プロンプト、プロジェクトルール、SKILL.md 風バンドルとして出力します。"
     },
     "preview": {
       "title": "コンテナボックス",
-      "format": "生成されたプロンプト/設定",
+      "format": "生成された Skill エクスポート",
       "copy": "クリップボードにコピー",
       "copied": "コピー済み",
-      "download": "設定をダウンロード"
+      "download": "エクスポートをダウンロード",
+      "exportAs": "エクスポート形式",
+      "targets": {
+        "universalPrompt": {
+          "label": "汎用プロンプト",
+          "description": "システムプロンプト、プロジェクト指示、新しいチャットに貼り付けます。"
+        },
+        "cursorRules": {
+          "label": "Cursor Rules",
+          "description": ".cursorrules をダウンロードして Cursor のプロジェクトルールとして使います。"
+        },
+        "codexSkillPack": {
+          "label": "Codex Skill Pack",
+          "description": "再利用できる Agent ワークフロー用の SKILL.md 風バンドルを出力します。"
+        }
+      }
     },
     "panel": {
       "docks": "Dock を探す",

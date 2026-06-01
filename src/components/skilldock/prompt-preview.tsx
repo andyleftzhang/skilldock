@@ -10,6 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import type { ExportArtifact, ExportTargetId } from "@/lib/skill-exporter";
+import { cn } from "@/lib/utils";
+
+export type ExportTargetOption = {
+  id: ExportTargetId;
+  label: string;
+  description: string;
+};
 
 type PromptPreviewProps = {
   title: string;
@@ -17,7 +26,11 @@ type PromptPreviewProps = {
   copyLabel: string;
   copiedLabel: string;
   downloadLabel: string;
-  promptConfig: string;
+  exportAsLabel: string;
+  exportArtifact: ExportArtifact;
+  exportTargets: ExportTargetOption[];
+  selectedExportTargetId: ExportTargetId;
+  onExportTargetChange: (targetId: ExportTargetId) => void;
 };
 
 export function PromptPreview({
@@ -26,23 +39,27 @@ export function PromptPreview({
   copyLabel,
   copiedLabel,
   downloadLabel,
-  promptConfig,
+  exportAsLabel,
+  exportArtifact,
+  exportTargets,
+  selectedExportTargetId,
+  onExportTargetChange,
 }: PromptPreviewProps) {
   const [copied, setCopied] = useState(false);
-  const promptPreviewLines = promptConfig.split("\n");
+  const promptPreviewLines = exportArtifact.content.split("\n");
 
   async function copyPrompt() {
-    await navigator.clipboard.writeText(promptConfig);
+    await navigator.clipboard.writeText(exportArtifact.content);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1600);
   }
 
   function downloadPrompt() {
-    const blob = new Blob([promptConfig], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([exportArtifact.content], { type: exportArtifact.mimeType });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "skilldock-config.txt";
+    link.download = exportArtifact.fileName;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -63,6 +80,39 @@ export function PromptPreview({
           <span className="size-2.5 rounded-full bg-emerald-400" />
         </div>
       </CardHeader>
+      <div className="border-b border-white/10 bg-white/[0.02] px-4 py-4">
+        <div className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+          {exportAsLabel}
+        </div>
+        <RadioGroup
+          className="grid grid-cols-1 gap-2 sm:grid-cols-3"
+          onValueChange={(value) => onExportTargetChange(value as ExportTargetId)}
+          value={selectedExportTargetId}
+        >
+          {exportTargets.map((target) => (
+            <label
+              className={cn(
+                "cursor-pointer rounded-2xl border border-white/10 bg-white/[0.035] p-3 transition hover:border-cyan-300/30 hover:bg-cyan-300/5",
+                target.id === selectedExportTargetId &&
+                  "border-cyan-300/40 bg-cyan-300/10",
+              )}
+              key={target.id}
+            >
+              <span className="flex items-start gap-2">
+                <RadioGroupItem className="mt-0.5" value={target.id} />
+                <span>
+                  <span className="block text-sm font-medium text-white">
+                    {target.label}
+                  </span>
+                  <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+                    {target.description}
+                  </span>
+                </span>
+              </span>
+            </label>
+          ))}
+        </RadioGroup>
+      </div>
       <CardContent className="p-0">
         <pre className="min-h-[24rem] overflow-hidden px-5 py-5 text-left font-mono text-[0.78rem] leading-7 text-slate-200 sm:text-sm">
           {promptPreviewLines.map((line, index) => (

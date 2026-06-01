@@ -10,17 +10,32 @@
       "language": "Language"
     },
     "hero": {
-      "headline": "Assemble AI skills like command modules.",
-      "highlightA": "Modular prompts",
-      "highlightB": "Live config preview",
-      "subtitle": "Pick personas, rules, and output constraints. SkillDock turns open AI skill patterns into a polished prompt/config you can copy or download."
+      "headline": "Build portable AI skill packs for your tools.",
+      "highlightA": "Skill pack exports",
+      "highlightB": "Rules + prompts + workflows",
+      "subtitle": "Pick personas, rules, and output constraints. SkillDock turns reusable AI skill patterns into prompts, project rules, or SKILL.md-style bundles you can copy or download."
     },
     "preview": {
       "title": "Container Box",
-      "format": "Generated prompt/config",
+      "format": "Generated skill export",
       "copy": "Copy to Clipboard",
       "copied": "Copied",
-      "download": "Download Config"
+      "download": "Download Export",
+      "exportAs": "Export as",
+      "targets": {
+        "universalPrompt": {
+          "label": "Universal Prompt",
+          "description": "Paste into system prompts, project instructions, or a new chat."
+        },
+        "cursorRules": {
+          "label": "Cursor Rules",
+          "description": "Download a .cursorrules file for project-level Cursor behavior."
+        },
+        "codexSkillPack": {
+          "label": "Codex Skill Pack",
+          "description": "Export a SKILL.md-style bundle for repeatable agent workflows."
+        }
+      }
     },
     "panel": {
       "docks": "Explore Docks",

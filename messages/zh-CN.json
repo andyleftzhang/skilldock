@@ -10,17 +10,32 @@
       "language": "语言"
     },
     "hero": {
-      "headline": "像拼装命令模块一样组合 AI 技能。",
-      "highlightA": "模块化提示词",
-      "highlightB": "实时配置预览",
-      "subtitle": "选择角色、规则与输出约束。SkillDock 会把开源 AI 技能模式包装成可复制、可下载的高级提示词/配置。"
+      "headline": "为你的 AI 工具构建可迁移 Skill Pack。",
+      "highlightA": "Skill Pack 导出",
+      "highlightB": "规则 + 提示词 + 工作流",
+      "subtitle": "选择角色、规则与输出约束。SkillDock 会把可复用的 AI 技能模式打包成提示词、项目规则，或接近 SKILL.md 的能力包。"
     },
     "preview": {
       "title": "实时集装箱",
-      "format": "已生成提示词/配置",
+      "format": "已生成 Skill 导出物",
       "copy": "复制到剪贴板",
       "copied": "已复制",
-      "download": "下载配置"
+      "download": "下载导出文件",
+      "exportAs": "导出为",
+      "targets": {
+        "universalPrompt": {
+          "label": "通用提示词",
+          "description": "粘贴到系统提示词、项目说明，或作为新对话开头。"
+        },
+        "cursorRules": {
+          "label": "Cursor Rules",
+          "description": "下载 .cursorrules，用作 Cursor 项目级规则。"
+        },
+        "codexSkillPack": {
+          "label": "Codex Skill Pack",
+          "description": "导出接近 SKILL.md 的能力包，用于可复用 Agent 工作流。"
+        }
+      }
     },
     "panel": {
       "docks": "探索 Docks",

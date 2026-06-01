@@ -17,6 +17,13 @@ export type SkillDockHomeMessages = {
   copy: string;
   copied: string;
   download: string;
+  exportAs: string;
+  universalPrompt: string;
+  universalPromptDescription: string;
+  cursorRules: string;
+  cursorRulesDescription: string;
+  codexSkillPack: string;
+  codexSkillPackDescription: string;
   docks: string;
   viewDetails: string;
   personas: string;
@@ -66,6 +73,24 @@ export function SkillDockHome({ locale, messages }: SkillDockHomeProps) {
               copiedLabel: messages.copied,
               copyLabel: messages.copy,
               downloadLabel: messages.download,
+              exportAsLabel: messages.exportAs,
+              exportTargets: [
+                {
+                  id: "universal-prompt",
+                  label: messages.universalPrompt,
+                  description: messages.universalPromptDescription,
+                },
+                {
+                  id: "cursor-rules",
+                  label: messages.cursorRules,
+                  description: messages.cursorRulesDescription,
+                },
+                {
+                  id: "codex-skill-pack",
+                  label: messages.codexSkillPack,
+                  description: messages.codexSkillPackDescription,
+                },
+              ],
               format: messages.previewFormat,
               title: messages.previewTitle,
             }}

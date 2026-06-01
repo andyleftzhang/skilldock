@@ -43,8 +43,9 @@ export function buildPromptConfig(state: BuilderState) {
 
 export function createInitialBuilderState(
   selectedOutputLocale: OutputLanguage["locale"],
+  selectedDockId?: string,
 ): BuilderState {
-  const dock = getDefaultDockTemplate();
+  const dock = selectedDockId ? getDockForState(selectedDockId) : getDefaultDockTemplate();
 
   return {
     selectedDockId: dock.id,

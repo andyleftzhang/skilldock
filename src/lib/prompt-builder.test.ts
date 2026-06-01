@@ -45,6 +45,15 @@ describe("prompt builder", () => {
     });
   });
 
+  it("creates initial state from a selected dock id", () => {
+    expect(createInitialBuilderState("en", "code-review-guardrails")).toEqual({
+      selectedDockId: "code-review-guardrails",
+      selectedPersonaId: "principal-reviewer",
+      selectedEnhancementIds: ["regression-map", "security-review"],
+      selectedOutputLocale: "en",
+    });
+  });
+
   it("falls back to the default dock when an unknown dock is selected", () => {
     const state = {
       selectedDockId: "unknown-dock",

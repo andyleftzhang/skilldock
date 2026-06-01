@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { dockTemplates, getDockTemplate } from "@/lib/dock-catalog";
@@ -40,12 +41,19 @@ type BuilderShellProps = {
 
 const supportedOutputLocales = new Set(["en", "ja", "es", "zh-CN"]);
 
-export function BuilderShell({ children, locale, panel, preview }: BuilderShellProps) {
+export function BuilderShell({
+  children,
+  locale,
+  panel,
+  preview,
+}: BuilderShellProps) {
+  const searchParams = useSearchParams();
+  const initialDockId = searchParams.get("dock") ?? undefined;
   const initialLocale = supportedOutputLocales.has(locale)
     ? (locale as OutputLanguage["locale"])
     : "en";
   const [builderState, setBuilderState] = useState<BuilderState>(() =>
-    createInitialBuilderState(initialLocale),
+    createInitialBuilderState(initialLocale, initialDockId),
   );
 
   const selectedDock = getDockTemplate(builderState.selectedDockId) ?? dockTemplates[0];

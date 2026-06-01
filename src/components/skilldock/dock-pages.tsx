@@ -105,7 +105,7 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
         <DockMetaGrid dock={dock} messages={messages} />
         <TagRow tags={dock.tags} />
         <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
-          <Link href={`/${locale}#builder`}>{messages.backToBuilder}</Link>
+          <Link href={`/${locale}?dock=${dock.id}#builder`}>{messages.backToBuilder}</Link>
         </Button>
       </div>
 

@@ -24,6 +24,7 @@
     },
     "panel": {
       "docks": "Dock を探す",
+      "viewDetails": "詳細を見る",
       "personas": "ベースペルソナ",
       "enhancements": "拡張設定",
       "outputLanguage": "出力言語",
@@ -31,5 +32,21 @@
       "shelfB": "棚 B",
       "shelfC": "棚 C"
     }
+  },
+  "Docks": {
+    "title": "Dock を探す",
+    "intro": "再利用できる AI スキルテンプレートを確認し、ペルソナやルールを見てからビルダーで設定を組み立てられます。",
+    "backToDocks": "Dock 一覧へ戻る",
+    "backToBuilder": "ビルダーで使う",
+    "builder": "デフォルト",
+    "details": "Dock 詳細",
+    "difficulty": "難易度",
+    "enhancements": "拡張設定",
+    "license": "ライセンス",
+    "origin": "出典",
+    "personas": "ペルソナ",
+    "source": "ソース",
+    "tags": "タグ",
+    "viewDetails": "詳細を見る"
   }
 }

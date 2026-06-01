@@ -24,6 +24,7 @@
     },
     "panel": {
       "docks": "探索 Docks",
+      "viewDetails": "查看详情",
       "personas": "基础角色",
       "enhancements": "增强规则",
       "outputLanguage": "输出语言",
@@ -31,5 +32,21 @@
       "shelfB": "货架 B",
       "shelfC": "货架 C"
     }
+  },
+  "Docks": {
+    "title": "探索 Docks",
+    "intro": "浏览可复用的 AI 技能模板，查看它们的角色与规则，再回到构建器拼装配置。",
+    "backToDocks": "返回 Docks",
+    "backToBuilder": "在构建器中使用",
+    "builder": "默认",
+    "details": "Dock 详情",
+    "difficulty": "难度",
+    "enhancements": "增强规则",
+    "license": "许可证",
+    "origin": "来源",
+    "personas": "角色",
+    "source": "源地址",
+    "tags": "标签",
+    "viewDetails": "查看详情"
   }
 }

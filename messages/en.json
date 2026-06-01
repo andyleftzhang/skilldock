@@ -24,6 +24,7 @@
     },
     "panel": {
       "docks": "Explore Docks",
+      "viewDetails": "View details",
       "personas": "Base Personas",
       "enhancements": "Enhancements",
       "outputLanguage": "Output Language",
@@ -31,5 +32,21 @@
       "shelfB": "Shelf B",
       "shelfC": "Shelf C"
     }
+  },
+  "Docks": {
+    "title": "Explore Docks",
+    "intro": "Browse reusable AI skill templates, inspect their personas and rules, then return to the builder to assemble a config.",
+    "backToDocks": "Back to Docks",
+    "backToBuilder": "Use in Builder",
+    "builder": "Default",
+    "details": "Dock Details",
+    "difficulty": "Difficulty",
+    "enhancements": "Enhancements",
+    "license": "License",
+    "origin": "Origin",
+    "personas": "Personas",
+    "source": "Source",
+    "tags": "Tags",
+    "viewDetails": "View Details"
   }
 }

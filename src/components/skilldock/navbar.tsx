@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./language-switcher";
 
 type NavbarProps = {
@@ -6,6 +7,9 @@ type NavbarProps = {
   exploreLabel: string;
   builderLabel: string;
   languageLabel: string;
+  exploreHref?: string;
+  builderHref?: string;
+  activeItem?: "explore" | "builder";
 };
 
 export function Navbar({
@@ -13,6 +17,9 @@ export function Navbar({
   exploreLabel,
   builderLabel,
   languageLabel,
+  exploreHref = "#explore",
+  builderHref = "#builder",
+  activeItem = "builder",
 }: NavbarProps) {
   return (
     <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
@@ -26,10 +33,22 @@ export function Navbar({
       </div>
 
       <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-        <a className="transition-colors hover:text-white" href="#explore">
+        <a
+          className={cn(
+            "transition-colors hover:text-white",
+            activeItem === "explore" && "text-white",
+          )}
+          href={exploreHref}
+        >
           {exploreLabel}
         </a>
-        <a className="text-white transition-colors hover:text-cyan-100" href="#builder">
+        <a
+          className={cn(
+            "transition-colors hover:text-cyan-100",
+            activeItem === "builder" && "text-white",
+          )}
+          href={builderHref}
+        >
           {builderLabel}
         </a>
       </nav>

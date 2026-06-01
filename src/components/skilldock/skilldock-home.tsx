@@ -17,6 +17,7 @@ export type SkillDockHomeMessages = {
   copied: string;
   download: string;
   docks: string;
+  viewDetails: string;
   personas: string;
   enhancements: string;
   outputLanguage: string;
@@ -35,8 +36,11 @@ export function SkillDockHome({ locale, messages }: SkillDockHomeProps) {
     <main className="relative min-h-svh overflow-hidden bg-background text-foreground">
       <DeckBackground />
       <Navbar
+        activeItem="builder"
+        builderHref="#builder"
         builderLabel={messages.navBuilder}
         currentLocale={locale}
+        exploreHref={`/${locale}/docks`}
         exploreLabel={messages.navExplore}
         languageLabel={messages.navLanguage}
       />
@@ -48,6 +52,7 @@ export function SkillDockHome({ locale, messages }: SkillDockHomeProps) {
           locale={locale}
           panel={{
             docksLabel: messages.docks,
+            viewDetailsLabel: messages.viewDetails,
             enhancementsLabel: messages.enhancements,
             outputLanguageLabel: messages.outputLanguage,
             personasLabel: messages.personas,

@@ -24,6 +24,7 @@
     },
     "panel": {
       "docks": "Explorar Docks",
+      "viewDetails": "Ver detalles",
       "personas": "Personas base",
       "enhancements": "Mejoras",
       "outputLanguage": "Idioma de salida",
@@ -31,5 +32,21 @@
       "shelfB": "Estante B",
       "shelfC": "Estante C"
     }
+  },
+  "Docks": {
+    "title": "Explorar Docks",
+    "intro": "Explora plantillas reutilizables de habilidades de IA, revisa sus personas y reglas, y vuelve al builder para ensamblar una config.",
+    "backToDocks": "Volver a Docks",
+    "backToBuilder": "Usar en Builder",
+    "builder": "Predeterminado",
+    "details": "Detalles del Dock",
+    "difficulty": "Dificultad",
+    "enhancements": "Mejoras",
+    "license": "Licencia",
+    "origin": "Origen",
+    "personas": "Personas",
+    "source": "Fuente",
+    "tags": "Etiquetas",
+    "viewDetails": "Ver detalles"
   }
 }

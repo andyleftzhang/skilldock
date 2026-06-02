@@ -1,8 +1,24 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { SkillDockHome } from "@/components/skilldock/skilldock-home";
 
 type Props = {
   params: Promise<{ locale: string }>;
+};
+
+export const metadata: Metadata = {
+  title: "Curated AI Skills and Agent Workflow Guides",
+  description:
+    "Find high-signal AI skill repositories, understand what each skill does, and learn how to install and try it in your own AI coding tool.",
+  alternates: {
+    canonical: "/en",
+  },
+  openGraph: {
+    title: "SkillDock | Curated AI Skills and Agent Workflow Guides",
+    description:
+      "Find curated AI skill repositories with practical install guidance and first-run examples.",
+    url: "/en",
+  },
 };
 
 export default async function HomePage({ params }: Props) {
@@ -20,26 +36,16 @@ export default async function HomePage({ params }: Props) {
         highlightA: t("hero.highlightA"),
         highlightB: t("hero.highlightB"),
         subtitle: t("hero.subtitle"),
-        previewTitle: t("preview.title"),
-        previewFormat: t("preview.format"),
-        copy: t("preview.copy"),
-        copied: t("preview.copied"),
-        download: t("preview.download"),
-        exportAs: t("preview.exportAs"),
-        universalPrompt: t("preview.targets.universalPrompt.label"),
-        universalPromptDescription: t("preview.targets.universalPrompt.description"),
-        cursorRules: t("preview.targets.cursorRules.label"),
-        cursorRulesDescription: t("preview.targets.cursorRules.description"),
-        codexSkillPack: t("preview.targets.codexSkillPack.label"),
-        codexSkillPackDescription: t("preview.targets.codexSkillPack.description"),
-        docks: t("panel.docks"),
+        howItWorksEyebrow: t("howItWorks.eyebrow"),
+        howItWorksTitle: t("howItWorks.title"),
+        howItWorksSubtitle: t("howItWorks.subtitle"),
+        howItWorksStepATitle: t("howItWorks.stepA.title"),
+        howItWorksStepADescription: t("howItWorks.stepA.description"),
+        howItWorksStepBTitle: t("howItWorks.stepB.title"),
+        howItWorksStepBDescription: t("howItWorks.stepB.description"),
+        howItWorksStepCTitle: t("howItWorks.stepC.title"),
+        howItWorksStepCDescription: t("howItWorks.stepC.description"),
         viewDetails: t("panel.viewDetails"),
-        personas: t("panel.personas"),
-        enhancements: t("panel.enhancements"),
-        outputLanguage: t("panel.outputLanguage"),
-        shelfA: t("panel.shelfA"),
-        shelfB: t("panel.shelfB"),
-        shelfC: t("panel.shelfC"),
       }}
     />
   );

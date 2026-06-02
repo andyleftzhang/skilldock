@@ -1,9 +1,11 @@
 import { Sparkles } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 type NavbarProps = {
   exploreLabel: string;
   builderLabel: string;
+  homeHref?: string;
   exploreHref?: string;
   builderHref?: string;
   activeItem?: "explore" | "builder";
@@ -12,20 +14,24 @@ type NavbarProps = {
 export function Navbar({
   exploreLabel,
   builderLabel,
+  homeHref = "/en",
   exploreHref = "#explore",
   builderHref = "#builder",
-  activeItem = "builder",
+  activeItem,
 }: NavbarProps) {
   return (
     <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-      <div className="flex items-center gap-3">
+      <Link
+        className="flex items-center gap-3 transition-opacity hover:opacity-90"
+        href={homeHref}
+      >
         <div className="flex size-10 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#22d3ee,#8b5cf6,#ec4899)] shadow-[0_0_34px_rgba(168,85,247,0.55)]">
           <Sparkles className="size-5 text-white" aria-hidden="true" />
         </div>
         <span className="text-lg font-semibold tracking-[-0.04em] text-white">
           SkillDock
         </span>
-      </div>
+      </Link>
 
       <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
         <a

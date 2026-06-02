@@ -11,6 +11,14 @@ import {
   getBuilderDockTemplate,
 } from "@/lib/dock-catalog";
 import {
+  activeSurfaceClass,
+  cn,
+  fuchsiaPanelClass,
+  interactiveSurfaceClass,
+  neonBadgeClass,
+  subtleBadgeClass,
+} from "@/lib/utils";
+import {
   createInitialBuilderState,
   toggleEnhancement,
 } from "@/lib/prompt-builder";
@@ -163,17 +171,18 @@ function DockExplorer({
   viewDetailsLabel: string;
 }) {
   return (
-    <Card className="min-w-0 border-violet-300/20 bg-slate-950/60 shadow-[0_18px_80px_rgba(139,92,246,0.12)] backdrop-blur-xl">
+    <Card className={cn("min-w-0", fuchsiaPanelClass)}>
       <CardHeader>
         <CardTitle className="text-base text-white">{label}</CardTitle>
       </CardHeader>
       <CardContent className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
         {builderDockTemplates.map((dock) => (
           <div
-            className={[
-              "min-w-0 rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-left transition hover:border-violet-300/50 hover:bg-violet-300/10",
-              dock.id === currentDockId ? "border-violet-300/50 bg-violet-300/10" : "",
-            ].join(" ")}
+            className={cn(
+              "min-w-0 rounded-2xl border p-4 text-left",
+              interactiveSurfaceClass,
+              dock.id === currentDockId && activeSurfaceClass,
+            )}
             key={dock.id}
           >
             <button
@@ -184,7 +193,7 @@ function DockExplorer({
             >
               <div className="flex items-start justify-between gap-3">
                 <span className="text-sm font-semibold text-white">{dock.title}</span>
-                <Badge variant={dock.taxonomy.difficulty === "starter" ? "default" : "secondary"}>
+                <Badge className={neonBadgeClass} variant="outline">
                   {dock.fileName}
                 </Badge>
               </div>
@@ -192,23 +201,23 @@ function DockExplorer({
                 {dock.shortDescription}
               </p>
               <div className="mt-3 grid grid-cols-2 gap-2 text-[0.68rem] text-muted-foreground">
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                <span className="rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                   {dock.builder.personas.length} personas
                 </span>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                <span className="rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                   {dock.builder.enhancements.length} rules
                 </span>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                <span className="rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                   {dock.taxonomy.category}
                 </span>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1">
+                <span className="rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                   {dock.stats.popularityLabel}
                 </span>
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {dock.taxonomy.tags.map((tag) => (
                   <Badge
-                    className="border-white/10 bg-white/5 text-[0.68rem] text-cyan-100"
+                    className={cn("text-[0.68rem]", subtleBadgeClass)}
                     key={tag}
                     variant="outline"
                   >

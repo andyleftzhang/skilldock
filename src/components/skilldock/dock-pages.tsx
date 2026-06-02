@@ -9,6 +9,16 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import type { DockTemplate } from "@/lib/dock-catalog";
+import {
+  cn,
+  cyanPanelClass,
+  dividerClass,
+  neonAccentBadgeClass,
+  neonBadgeClass,
+  premiumButtonClass,
+  quietPanelClass,
+  subtleBadgeClass,
+} from "@/lib/utils";
 
 export type DockPageMessages = {
   backToDocks: string;
@@ -34,6 +44,7 @@ export type DockPageMessages = {
   supportedTools: string;
   tags: string;
   title: string;
+  startCommands: string;
   intro: string;
   useCases: string;
   viewDetails: string;
@@ -57,7 +68,7 @@ export function DockList({ docks, locale, messages }: DockListProps) {
   return (
     <section className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 pb-16 pt-8 sm:px-8 lg:pb-24 lg:pt-12">
       <div className="max-w-3xl">
-        <Badge className="border-cyan-300/20 bg-cyan-300/10 text-cyan-100" variant="outline">
+        <Badge className={neonBadgeClass} variant="outline">
           {messages.source}
         </Badge>
         <h1 className="mt-4 text-balance text-5xl font-semibold leading-[0.95] tracking-[-0.08em] text-white sm:text-6xl">
@@ -71,13 +82,20 @@ export function DockList({ docks, locale, messages }: DockListProps) {
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {docks.map((dock) => (
           <Card
-            className="border-white/10 bg-slate-950/70 shadow-[0_20px_90px_rgba(34,211,238,0.12)] backdrop-blur-xl"
+            className={quietPanelClass}
             key={dock.id}
           >
             <CardHeader>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <CardTitle className="text-xl text-white">{dock.title}</CardTitle>
-                <Badge variant={dock.taxonomy.difficulty === "starter" ? "default" : "secondary"}>
+                <Badge
+                  className={
+                    dock.taxonomy.difficulty === "starter"
+                      ? neonBadgeClass
+                      : neonAccentBadgeClass
+                  }
+                  variant="outline"
+                >
                   {dock.taxonomy.difficulty}
                 </Badge>
               </div>
@@ -88,7 +106,7 @@ export function DockList({ docks, locale, messages }: DockListProps) {
             <CardContent className="flex flex-col gap-5">
               <DockMetaGrid dock={dock} messages={messages} />
               <TagRow tags={dock.taxonomy.tags} />
-              <Button asChild className="w-full bg-cyan-300 text-slate-950 hover:bg-cyan-200">
+              <Button asChild className={cn("w-full", premiumButtonClass)}>
                 <Link href={`/${locale}/docks/${dock.id}`}>{messages.viewDetails}</Link>
               </Button>
             </CardContent>
@@ -107,7 +125,7 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
           ← {messages.backToDocks}
         </Link>
         <div>
-          <Badge className="border-fuchsia-300/20 bg-fuchsia-300/10 text-fuchsia-100" variant="outline">
+          <Badge className={neonAccentBadgeClass} variant="outline">
             {dock.fileName}
           </Badge>
           <h1 className="mt-4 text-balance text-5xl font-semibold leading-[0.95] tracking-[-0.08em] text-white sm:text-6xl">
@@ -120,13 +138,15 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
         <DockMetaGrid dock={dock} messages={messages} />
         <TagRow tags={dock.taxonomy.tags} />
         {dock.builder ? (
-          <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
-            <Link href={`/${locale}?dock=${dock.id}#builder`}>{messages.backToBuilder}</Link>
+          <Button asChild className={premiumButtonClass}>
+            <Link href={`/${locale}/builder?dock=${dock.id}`}>
+              {messages.backToBuilder}
+            </Link>
           </Button>
         ) : null}
       </div>
 
-      <Card className="border-cyan-300/20 bg-slate-950/75 shadow-[0_24px_120px_rgba(34,211,238,0.16)] backdrop-blur-xl">
+      <Card className={cyanPanelClass}>
         <CardHeader>
           <CardTitle className="text-white">{messages.details}</CardTitle>
         </CardHeader>
@@ -136,39 +156,49 @@ export function DockDetail({ dock, locale, messages }: DockDetailProps) {
             items={dock.content.useCases.slice(0, 2)}
           />
 
-          <Separator className="bg-white/10" />
+          <Separator className={dividerClass} />
 
           <ContentSection
             title={messages.bestFor}
             items={dock.content.recommendedFor.slice(0, 4)}
           />
 
-          <Separator className="bg-white/10" />
+          <Separator className={dividerClass} />
 
           <ContentSection
             title={messages.whyFeatured}
             items={dock.guide.bestPractices.slice(0, 3)}
           />
 
-          <Separator className="bg-white/10" />
+          <Separator className={dividerClass} />
 
           <ContentSection title={messages.supportedTools} items={dock.guide.supportedTools} />
 
-          <Separator className="bg-white/10" />
+          {dock.guide.entryCommands ? (
+            <>
+              <Separator className={dividerClass} />
+              <ContentSection
+                title={messages.startCommands}
+                items={dock.guide.entryCommands}
+              />
+            </>
+          ) : null}
+
+          <Separator className={dividerClass} />
 
           <ContentSection
             title={messages.firstTasks}
             items={dock.guide.firstRunExamples.slice(0, 3)}
           />
 
-          <Separator className="bg-white/10" />
+          <Separator className={dividerClass} />
 
           <ContentSection title={messages.safetyNotes} items={dock.content.safetyNotes.slice(0, 2)} />
 
           {dock.source.url ? (
             <>
-              <Separator className="bg-white/10" />
-              <Button asChild className="bg-cyan-300 text-slate-950 hover:bg-cyan-200">
+              <Separator className={dividerClass} />
+              <Button asChild className={premiumButtonClass}>
                 <Link href={dock.source.url}>{messages.source}</Link>
               </Button>
             </>
@@ -197,7 +227,10 @@ function DockMetaGrid({
   return (
     <div className="grid grid-cols-1 gap-2 text-xs text-muted-foreground sm:grid-cols-2">
       {items.map(([label, value]) => (
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3" key={label}>
+        <div
+          className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          key={label}
+        >
           <div className="text-[0.68rem] uppercase tracking-[0.22em] text-cyan-200/80">
             {label}
           </div>
@@ -221,8 +254,9 @@ function ContentSection({
 
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200">
-        {title}
+      <h2 className="flex items-center gap-3 text-base font-semibold tracking-[-0.02em] text-slate-50">
+        <span className="h-px w-8 shrink-0 bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-transparent shadow-[0_0_16px_rgba(34,211,238,0.45)]" />
+        <span>{title}</span>
       </h2>
       <List className="flex flex-col gap-2 text-sm leading-6 text-muted-foreground">
         {items.map((item) => (
@@ -239,7 +273,7 @@ function TagRow({ tags }: { tags: string[] }) {
   return (
     <div className="flex flex-wrap gap-2">
       {tags.map((tag) => (
-        <Badge className="border-white/10 bg-white/5 text-cyan-100" key={tag} variant="outline">
+        <Badge className={subtleBadgeClass} key={tag} variant="outline">
           {tag}
         </Badge>
       ))}

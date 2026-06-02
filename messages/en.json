@@ -15,6 +15,23 @@
       "highlightB": "Install + first-run guides",
       "subtitle": "SkillDock helps you understand which GitHub AI skills are worth using, where they fit, how to install them, and the first tasks to try."
     },
+    "howItWorks": {
+      "eyebrow": "How SkillDock works",
+      "title": "Pick a skill with confidence, then use it in your own AI tool.",
+      "subtitle": "Each Dock is a short field guide: what the skill is for, which tools it supports, where the source lives, and what to try first.",
+      "stepA": {
+        "title": "1. Choose a curated Dock",
+        "description": "Start from a small list of high-signal skill repositories instead of browsing random prompt collections."
+      },
+      "stepB": {
+        "title": "2. Read the usage guide",
+        "description": "Check supported tools, starter commands, first tasks, and safety notes before installing anything."
+      },
+      "stepC": {
+        "title": "3. Install from the source",
+        "description": "Open the GitHub source or copy the listed command, then run the skill inside Codex, Claude Code, Cursor, or another compatible tool."
+      }
+    },
     "preview": {
       "title": "Container Box",
       "format": "Generated skill export",
@@ -71,6 +88,7 @@
     "recommendedWorkflow": "Recommended workflow",
     "safetyNotes": "Safety notes",
     "source": "Source",
+    "startCommands": "Start with these commands",
     "supportedTools": "Supported tools",
     "tags": "Tags",
     "useCases": "Use cases",

@@ -15,7 +15,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { dockId } = await params;
+  const { locale, dockId } = await params;
   const dock = getDockTemplate(dockId);
 
   if (!dock) {
@@ -25,8 +25,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${dock.title} | SkillDock`,
+    title: dock.title,
     description: dock.shortDescription,
+    alternates: {
+      canonical: `/${locale}/docks/${dock.id}`,
+    },
+    openGraph: {
+      title: `${dock.title} | SkillDock`,
+      description: dock.shortDescription,
+      url: `/${locale}/docks/${dock.id}`,
+      type: "article",
+    },
   };
 }
 
@@ -47,10 +56,11 @@ export default async function DockDetailPage({ params }: Props) {
       <DeckBackground />
       <Navbar
         activeItem="explore"
-        builderHref={`/${locale}#builder`}
+        builderHref={`/${locale}/builder`}
         builderLabel={landing("nav.builder")}
         exploreHref={`/${locale}/docks`}
         exploreLabel={landing("nav.explore")}
+        homeHref={`/${locale}`}
       />
       <DockDetail
         dock={dock}
@@ -77,6 +87,7 @@ export default async function DockDetailPage({ params }: Props) {
           recommendedWorkflow: docks("recommendedWorkflow"),
           safetyNotes: docks("safetyNotes"),
           source: docks("source"),
+          startCommands: docks("startCommands"),
           supportedTools: docks("supportedTools"),
           tags: docks("tags"),
           title: docks("title"),

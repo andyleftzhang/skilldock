@@ -30,6 +30,13 @@ export function getSeoRoutes(
       priority: 0.8,
     });
 
+    routes.push({
+      url: `${baseUrl}/${locale}/builder`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    });
+
     for (const dock of dockTemplates) {
       routes.push({
         url: `${baseUrl}/${locale}/docks/${dock.id}`,

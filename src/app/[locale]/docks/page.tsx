@@ -10,8 +10,18 @@ type Props = {
 };
 
 export const metadata: Metadata = {
-  title: "Explore Docks | SkillDock",
-  description: "Browse reusable AI skill templates for SkillDock.",
+  title: "Explore Docks",
+  description:
+    "Browse curated AI skills and agent workflow repositories with supported tools, source links, starter commands, and practical first tasks.",
+  alternates: {
+    canonical: "/en/docks",
+  },
+  openGraph: {
+    title: "Explore Docks | SkillDock",
+    description:
+      "Browse curated AI skills and agent workflow repositories with practical usage guidance.",
+    url: "/en/docks",
+  },
 };
 
 export default async function DocksPage({ params }: Props) {
@@ -25,10 +35,11 @@ export default async function DocksPage({ params }: Props) {
       <DeckBackground />
       <Navbar
         activeItem="explore"
-        builderHref={`/${locale}#builder`}
+        builderHref={`/${locale}/builder`}
         builderLabel={landing("nav.builder")}
         exploreHref={`/${locale}/docks`}
         exploreLabel={landing("nav.explore")}
+        homeHref={`/${locale}`}
       />
       <DockList
         docks={dockTemplates}
@@ -55,6 +66,7 @@ export default async function DocksPage({ params }: Props) {
           recommendedWorkflow: docks("recommendedWorkflow"),
           safetyNotes: docks("safetyNotes"),
           source: docks("source"),
+          startCommands: docks("startCommands"),
           supportedTools: docks("supportedTools"),
           tags: docks("tags"),
           title: docks("title"),

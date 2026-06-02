@@ -12,7 +12,14 @@ import {
 } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { ExportArtifact, ExportTargetId } from "@/lib/skill-exporter";
-import { cn } from "@/lib/utils";
+import {
+  activeSurfaceClass,
+  cn,
+  cyanPanelClass,
+  interactiveSurfaceClass,
+  premiumButtonClass,
+  sectionLabelClass,
+} from "@/lib/utils";
 
 export type ExportTargetOption = {
   id: ExportTargetId;
@@ -65,7 +72,7 @@ export function PromptPreview({
   }
 
   return (
-    <Card className="min-w-0 overflow-hidden border-cyan-300/20 bg-slate-950/80 shadow-[0_24px_120px_rgba(34,211,238,0.18)] backdrop-blur-xl">
+    <Card className={cn("min-w-0 overflow-hidden", cyanPanelClass)}>
       <CardHeader className="flex flex-row items-center justify-between border-b border-white/10">
         <div>
           <CardTitle className="flex items-center gap-2 text-base text-white">
@@ -81,7 +88,7 @@ export function PromptPreview({
         </div>
       </CardHeader>
       <div className="min-w-0 border-b border-white/10 bg-white/[0.02] px-4 py-4">
-        <div className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+        <div className={cn("mb-3", sectionLabelClass)}>
           {exportAsLabel}
         </div>
         <RadioGroup
@@ -92,9 +99,9 @@ export function PromptPreview({
           {exportTargets.map((target) => (
             <label
               className={cn(
-                "min-w-0 cursor-pointer rounded-2xl border border-white/10 bg-white/[0.035] p-3 transition hover:border-cyan-300/30 hover:bg-cyan-300/5",
-                target.id === selectedExportTargetId &&
-                  "border-cyan-300/40 bg-cyan-300/10",
+                "min-w-0 cursor-pointer rounded-2xl border p-3",
+                interactiveSurfaceClass,
+                target.id === selectedExportTargetId && activeSurfaceClass,
               )}
               key={target.id}
             >
@@ -144,7 +151,7 @@ export function PromptPreview({
           {copied ? copiedLabel : copyLabel}
         </Button>
         <Button
-          className="w-full bg-cyan-300 text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.34)] hover:bg-cyan-200 sm:w-auto"
+          className={cn("w-full sm:w-auto", premiumButtonClass)}
           onClick={downloadPrompt}
           type="button"
         >

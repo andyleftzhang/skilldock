@@ -59,10 +59,11 @@ describe("dock catalog", () => {
   });
 
   it("looks up dock templates by id", () => {
-    expect(getDockTemplate("neon-command-deck")).toBe(dockTemplates[0]);
+    expect(getDockTemplate("neon-command-deck")?.title).toBe("Neon Command Deck");
     expect(getDockTemplate("code-review-guardrails")?.title).toBe(
       "Code Review Guardrails",
     );
+    expect(getDockTemplate("agent-skills")?.guide.entryCommands).toContain("/spec");
     expect(getDockTemplate("missing-dock")).toBeUndefined();
   });
 

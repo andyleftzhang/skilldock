@@ -54,6 +54,7 @@ export type DockTemplate = {
   };
   guide: {
     supportedTools: string[];
+    entryCommands?: string[];
     installGuide: string[];
     firstRunExamples: string[];
     bestPractices: string[];
@@ -85,6 +86,279 @@ const sharedOutputLanguages: OutputLanguage[] = [
 ];
 
 export const dockTemplates: DockTemplate[] = [
+  {
+    id: "openai-skills",
+    dockMode: "guide",
+    projectType: "agent-skill-library",
+    slug: "openai-skills",
+    title: "OpenAI Skills",
+    fileName: "skills/*",
+    headline: "A Codex skills catalog for reusable agent capabilities.",
+    shortDescription:
+      "A concise guide to OpenAI's skills catalog for installing curated and experimental Codex skills.",
+    longDescription:
+      "OpenAI Skills catalogs folders of instructions, scripts, and resources that Codex can discover and use for repeatable tasks.",
+    source: {
+      type: "github",
+      repo: "openai/skills",
+      url: "https://github.com/openai/skills",
+      author: "OpenAI",
+      license: "Per-skill license",
+      lastUpdated: "2026-06-01",
+    },
+    stats: {
+      popularityLabel: "Codex catalog",
+      moduleCount: 20,
+    },
+    taxonomy: {
+      category: "Tools",
+      occupation: "Codex User",
+      tags: ["openai", "codex", "skills", "catalog", "agent-skills"],
+      difficulty: "starter",
+    },
+    content: {
+      useCases: [
+        "Find reusable skills that are designed for Codex workflows.",
+        "Install curated or experimental skills without manually copying prompt text.",
+        "Learn the folder-based Agent Skills pattern from an official catalog.",
+      ],
+      includedModules: [
+        "System skills",
+        "Curated skills",
+        "Experimental skills",
+        "Skill installation examples",
+      ],
+      recommendedFor: [
+        "Codex users",
+        "Teams standardizing repeatable agent workflows",
+        "People learning how OpenAI-style skills are packaged",
+      ],
+      recommendedWorkflow: [
+        "Start with a curated skill that matches one recurring task.",
+        "Install through Codex skill tooling instead of copying files by hand.",
+        "Restart Codex after installing new skills.",
+      ],
+      safetyNotes: [
+        "Review experimental skills before relying on them for production work.",
+        "Check individual skill licenses and scripts before redistribution.",
+      ],
+    },
+    guide: {
+      supportedTools: ["Codex"],
+      entryCommands: ["$skill-installer", "$skill-installer gh-address-comments"],
+      installGuide: [
+        "Use the skill installer inside Codex for curated or experimental skills.",
+        "Install by skill name, folder, or GitHub directory URL.",
+        "Restart Codex after installation so the new skill is discoverable.",
+      ],
+      firstRunExamples: [
+        "$skill-installer gh-address-comments",
+        "$skill-installer install https://github.com/openai/skills/tree/main/skills/.experimental/create-plan",
+      ],
+      bestPractices: [
+        "It is the most direct source for Codex-native skill packaging patterns.",
+        "It separates system, curated, and experimental skills so users can choose their risk level.",
+        "It teaches users to install skills through tooling instead of pasting prompts.",
+      ],
+      commonMistakes: [
+        "Installing experimental skills without reading the skill folder first.",
+        "Forgetting to restart Codex after installation.",
+      ],
+      whenNotToUse: [
+        "Avoid it if your primary tool is not Codex.",
+        "Do not assume every experimental skill is production-ready.",
+      ],
+    },
+  },
+  {
+    id: "google-skills",
+    dockMode: "guide",
+    projectType: "agent-skill-library",
+    slug: "google-skills",
+    title: "Google Skills",
+    fileName: "skills/cloud/*",
+    headline: "Agent Skills for Google products, technologies, and Cloud workflows.",
+    shortDescription:
+      "A curated guide to Google's Agent Skills for Google Cloud, Firebase, BigQuery, Cloud Run, and well-architected reviews.",
+    longDescription:
+      "Google Skills packages Agent Skills for Google products and technologies, including installable Google Cloud basics, recipes, and well-architected framework guidance.",
+    source: {
+      type: "github",
+      repo: "google/skills",
+      url: "https://github.com/google/skills",
+      author: "Google",
+      license: "Apache-2.0",
+      lastUpdated: "2026-06-01",
+    },
+    stats: {
+      popularityLabel: "Google Cloud skills",
+      moduleCount: 18,
+    },
+    taxonomy: {
+      category: "Tools",
+      occupation: "Cloud Developer",
+      tags: ["google", "google-cloud", "firebase", "bigquery", "agent-skills"],
+      difficulty: "advanced",
+    },
+    content: {
+      useCases: [
+        "Give an AI agent Google Cloud and Google product context for common engineering tasks.",
+        "Use focused skills for Cloud Run, BigQuery, Firebase, AlloyDB, Cloud SQL, and GKE basics.",
+        "Apply Google Cloud well-architected review perspectives to architecture and operations work.",
+      ],
+      includedModules: [
+        "Google Cloud basics",
+        "Firebase and data platform skills",
+        "Agent Platform API skills",
+        "Well-Architected Framework review skills",
+      ],
+      recommendedFor: [
+        "Google Cloud users",
+        "Cloud engineers",
+        "Teams building on Firebase, BigQuery, Cloud Run, or GKE",
+      ],
+      recommendedWorkflow: [
+        "Install only the Google skill that matches the service you are using.",
+        "Start with a basics skill before asking for architecture review.",
+        "Use the well-architected skills when reviewing production systems.",
+      ],
+      safetyNotes: [
+        "Do not paste cloud credentials or secrets into prompts.",
+        "Validate generated cloud commands against your own project, billing, and IAM policies.",
+      ],
+    },
+    guide: {
+      supportedTools: ["Agent Skills compatible tools", "Codex", "Claude Code"],
+      entryCommands: ["npx skills add google/skills"],
+      installGuide: [
+        "Run `npx skills add google/skills`.",
+        "Select only the specific Google skills you need.",
+        "Test with a non-production project before applying advice to real infrastructure.",
+      ],
+      firstRunExamples: [
+        "Use the Cloud Run Basics skill to review this service deployment.",
+        "Use the BigQuery Basics skill to explain this query and cost risk.",
+        "Use the Security well-architected skill to review this Google Cloud design.",
+      ],
+      bestPractices: [
+        "It is best for users already working with Google Cloud or Google product stacks.",
+        "The install command lets users select specific skills instead of cloning everything.",
+        "The well-architected skills make it useful beyond simple how-to prompts.",
+      ],
+      commonMistakes: [
+        "Installing broad cloud skills without knowing which Google service is involved.",
+        "Applying generated infrastructure advice without checking IAM and billing impact.",
+      ],
+      whenNotToUse: [
+        "Avoid it if your stack is not Google-based.",
+        "Do not use it as a substitute for official cloud security review.",
+      ],
+    },
+  },
+  {
+    id: "agent-skills",
+    dockMode: "guide",
+    projectType: "agent-skill-library",
+    slug: "agent-skills",
+    title: "Agent Skills",
+    fileName: "commands + skills",
+    headline: "Production-grade engineering workflows for AI coding agents.",
+    shortDescription:
+      "A curated guide to Addy Osmani's engineering skill library for spec, plan, build, test, review, simplify, and ship workflows.",
+    longDescription:
+      "Agent Skills turns senior engineering practices into reusable commands and skills for AI coding agents, with strong emphasis on quality gates, verification, and production readiness.",
+    source: {
+      type: "github",
+      repo: "addyosmani/agent-skills",
+      url: "https://github.com/addyosmani/agent-skills",
+      author: "Addy Osmani / contributors",
+      license: "Source repository license",
+      lastUpdated: "2026-06-01",
+    },
+    stats: {
+      popularityLabel: "Engineering lifecycle",
+      moduleCount: 23,
+    },
+    taxonomy: {
+      category: "Development",
+      occupation: "Software Engineer",
+      tags: ["coding-agent", "engineering", "commands", "quality", "production"],
+      difficulty: "advanced",
+    },
+    content: {
+      useCases: [
+        "Give an AI coding agent a clearer engineering lifecycle instead of vague coding prompts.",
+        "Move from specification to planning, building, testing, review, simplification, and shipping.",
+        "Add quality gates and verification habits to agent-assisted development.",
+      ],
+      includedModules: [
+        "Slash command workflows",
+        "Engineering lifecycle skills",
+        "Testing and review gates",
+        "Code simplification and shipping workflows",
+      ],
+      recommendedFor: [
+        "AI coding agent users",
+        "Senior engineers",
+        "Technical leads",
+        "Builders who care about production-grade workflow",
+      ],
+      recommendedWorkflow: [
+        "Start with /spec before asking the agent to build.",
+        "Use /plan to decompose the work into concrete steps.",
+        "Use /build and /test for implementation and verification.",
+        "Use /review and /ship before treating the work as release-ready.",
+      ],
+      safetyNotes: [
+        "Treat command output as engineering assistance, not final production approval.",
+        "Keep human review in the loop for security, data, and release decisions.",
+      ],
+    },
+    guide: {
+      supportedTools: [
+        "Claude Code",
+        "Cursor",
+        "Gemini CLI",
+        "Windsurf",
+        "OpenCode",
+        "GitHub Copilot",
+        "Kiro",
+        "Codex",
+      ],
+      entryCommands: [
+        "/spec",
+        "/plan",
+        "/build",
+        "/test",
+        "/review",
+        "/code-simplify",
+        "/ship",
+      ],
+      installGuide: [
+        "Choose the installation instructions for your coding agent in the source README.",
+        "Install the commands and skills for the tool you actually use.",
+        "Restart or reload your agent session before trying a workflow command.",
+      ],
+      firstRunExamples: [
+        "/spec Define a checkout flow for a small SaaS app.",
+        "/plan Break this feature into implementation tasks.",
+        "/review Review this branch for production risks.",
+      ],
+      bestPractices: [
+        "It covers the full engineering lifecycle, not just isolated prompt snippets.",
+        "It gives agents concrete entry commands, which is easier for users to try than browsing 23 skills.",
+        "It emphasizes testing, review, simplification, and shipping rather than pure code generation.",
+      ],
+      commonMistakes: [
+        "Jumping straight to /build before clarifying the specification.",
+        "Treating one command as a replacement for human engineering judgment.",
+      ],
+      whenNotToUse: [
+        "Avoid it for tiny edits where a full engineering lifecycle is unnecessary.",
+        "Do not use it as the final authority for production releases.",
+      ],
+    },
+  },
   {
     id: "neon-command-deck",
     dockMode: "builder",

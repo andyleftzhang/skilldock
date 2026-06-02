@@ -9,7 +9,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import type { Enhancement, OutputLanguage, Persona } from "@/lib/skilldock-types";
-import { cn } from "@/lib/utils";
+import {
+  activeSurfaceClass,
+  cn,
+  dividerClass,
+  fuchsiaPanelClass,
+  interactiveSurfaceClass,
+  subtleBadgeClass,
+} from "@/lib/utils";
 
 type DockingPanelProps = {
   personasLabel: string;
@@ -47,7 +54,7 @@ export function DockingPanel({
   onOutputLanguageChange,
 }: DockingPanelProps) {
   return (
-    <Card className="min-w-0 border-fuchsia-300/20 bg-slate-950/70 shadow-[0_24px_120px_rgba(236,72,153,0.16)] backdrop-blur-xl">
+    <Card className={cn("min-w-0", fuchsiaPanelClass)}>
       <CardHeader>
         <CardTitle className="text-base text-white">Docking Panel</CardTitle>
       </CardHeader>
@@ -55,13 +62,13 @@ export function DockingPanel({
         <section className="flex flex-col gap-3">
           <PanelHeading label={personasLabel} shelf={shelfA} />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {personas.map((persona, index) => (
+            {personas.map((persona) => (
               <button
                 aria-pressed={persona.id === selectedPersonaId}
                 className={cn(
-                  "rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-left transition hover:border-cyan-300/50 hover:bg-cyan-300/10",
-                  persona.id === selectedPersonaId &&
-                    "border-cyan-300/50 bg-cyan-300/10 shadow-[0_0_30px_rgba(34,211,238,0.14)]",
+                  "rounded-2xl border p-3 text-left",
+                  interactiveSurfaceClass,
+                  persona.id === selectedPersonaId && activeSurfaceClass,
                 )}
                 key={persona.id}
                 onClick={() => onPersonaSelect(persona.id)}
@@ -69,7 +76,7 @@ export function DockingPanel({
               >
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-sm font-medium text-white">{persona.title}</span>
-                  <Badge variant={index === 0 ? "default" : "secondary"}>
+                  <Badge className={subtleBadgeClass} variant="outline">
                     {persona.signal}
                   </Badge>
                 </div>
@@ -81,14 +88,17 @@ export function DockingPanel({
           </div>
         </section>
 
-        <Separator className="bg-white/10" />
+        <Separator className={dividerClass} />
 
         <section className="flex flex-col gap-3">
           <PanelHeading label={enhancementsLabel} shelf={shelfB} />
           <div className="flex flex-col gap-3">
             {enhancements.map((enhancement) => (
               <label
-                className="flex cursor-pointer items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-3 transition hover:border-cyan-300/30 hover:bg-cyan-300/5"
+                className={cn(
+                  "flex cursor-pointer items-start gap-3 rounded-2xl border p-3",
+                  interactiveSurfaceClass,
+                )}
                 key={enhancement.id}
               >
                 <Checkbox
@@ -108,7 +118,7 @@ export function DockingPanel({
           </div>
         </section>
 
-        <Separator className="bg-white/10" />
+        <Separator className={dividerClass} />
 
         <section className="flex flex-col gap-3">
           <PanelHeading label={outputLanguageLabel} shelf={shelfC} />
@@ -122,9 +132,9 @@ export function DockingPanel({
             {outputLanguages.map((language) => (
               <label
                 className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-3 transition hover:border-cyan-300/30 hover:bg-cyan-300/5",
-                  language.locale === selectedOutputLocale &&
-                    "border-cyan-300/40 bg-cyan-300/10",
+                  "flex cursor-pointer items-center gap-3 rounded-2xl border p-3",
+                  interactiveSurfaceClass,
+                  language.locale === selectedOutputLocale && activeSurfaceClass,
                 )}
                 key={language.locale}
               >
@@ -146,7 +156,7 @@ function PanelHeading({ label, shelf }: { label: string; shelf: string }) {
   return (
     <div className="flex items-center justify-between gap-3">
       <h2 className="text-sm font-semibold text-white">{label}</h2>
-      <Badge className="border-white/10 bg-white/5 text-cyan-100" variant="outline">
+      <Badge className={subtleBadgeClass} variant="outline">
         {shelf}
       </Badge>
     </div>

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { dockTemplates } from "./dock-catalog";
 import { routing } from "@/i18n/routing";
 
-const fallbackSiteUrl = "https://skilldock.pages.dev";
+const fallbackSiteUrl = "https://skilldock.andyleftzhang.workers.dev";
 const lastModified = new Date("2026-06-01T00:00:00.000Z");
 
 export function normalizeSiteUrl(siteUrl: string | undefined) {
